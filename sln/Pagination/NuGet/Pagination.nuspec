@@ -5,7 +5,7 @@
     <version>0.0.0</version>
     <authors>Ken Yourek</authors>
     <owners>Ken Yourek</owners>
-    <licenseUrl>http://code.google.com/p/source-pagination/source/browse/trunk/Pagination/License.txt</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/kyourek/Pagination/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/kyourek/Pagination</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
