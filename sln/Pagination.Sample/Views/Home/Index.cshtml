@@ -1,0 +1,72 @@
+﻿@using Pagination
+@using Pagination.Models
+@using Pagination.Sample.Models
+@model IPageSourceModel<string, SearchModel>
+
+@{
+    var results = Model.OrderBy(s => s).Query();
+    var items = results.Results.Select(r => new { TypeName = r });
+    var pages = results.LinkPages(PageLinker.CreateDynamic(true, "←", "→"));
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Pagination</title>
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap.min.css")" />
+        <style type="text/css">
+            ul.pages {
+                list-style-type: none;
+            }
+            ul.pages li {
+                display: inline;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <form action="#" method="get">
+                <div>
+                    <label for="SearchText">Search Text</label>
+                    <input type="text" name="SearchText" id="SearchText" value="@Model.Request.SearchText" />
+                </div>
+                <div>
+                    <label for="ItemsPerPage">ItemsPerPage</label>
+                    <input type="text" name="ItemsPerPage" id="ItemsPerPage" value="@Model.Request.ItemsPerPage" />
+                </div>
+                <div>
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
+        <div> 
+            <p>@pages.TotalItemCount items on @pages.TotalPageCount @(pages.TotalPageCount == 1 ? "page" : "pages")</p>
+            <p>Current Page: @pages.First(p => p.IsRequestedPage).LinkPageBase1</p>
+            <ul class="pages">
+                @foreach (var page in pages) {
+                    if (page.IsPageRange) {
+                        <li>...</li>
+                    }
+                    else {
+                        if (page.IsRequestedPage) {
+                            <li><strong>@page.LinkText</strong></li>
+                        }
+                        else {
+                            <li>@Html.PageLink(page)</li>
+                        }
+                    }
+                }
+            </ul>
+            @Html.Partial("Pagination/Bootstrap", pages);
+        </div>
+        <div>
+            <ul>
+                @foreach (var item in items) {
+                    <li>@item.TypeName</li>
+                }
+            </ul>
+        </div>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    </body>
+</html>
