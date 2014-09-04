@@ -1,3 +1,7 @@
+Pagination
+==========
+(formerly https://code.google.com/p/source-pagination/)
+
 Pagination allows easy control and deferred execution of specific pages in a LINQ request.
 
 First, we'll create a model that extends `Pagination.Models.PageRequestModel`. Extending this class gives our model properties like `RequestedPage` (the page index requested by the user) and `ItemsPerPage` (the number of items to show per page). Our model will also inherit the method `GetRequestValues`, which can serialize the simple properties of the model to an `IDictionary<string, object>` of key-value pairs.
