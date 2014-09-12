@@ -12,6 +12,6 @@
     <description>Pagination offers easy control over paged results from IQueryable sources.</description>
     <releaseNotes>Combined core and MVC functionality into a single assembly.</releaseNotes>
     <copyright>Copyright Ken Yourek 2014</copyright>
-    <tags>Pagination Paging Pages LINQ</tags>
+    <tags>Pagination Paging Pages Pager LINQ</tags>
   </metadata>
 </package>
