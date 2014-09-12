@@ -83,7 +83,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="License.txt" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

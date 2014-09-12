@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ken Yourek")]
 [assembly: AssemblyProduct("Pagination.Sample")]
-[assembly: AssemblyCopyright("Copyright © Ken Yourek 2014")]
+[assembly: AssemblyCopyright("Copyright © Ken Yourek 2013-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
