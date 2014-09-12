@@ -41,3 +41,5 @@ Now we can get to work. The results object has properties like `TotalPageCount` 
 To create a collection of `Pagination.Models.IPageLinkModel` (a class that can be used to create an HTML link to a specific page in the request), use the `LinkPages` method.
 
     var pages = results.LinkPages(PageLinker.CreateDynamic(true, "←", "→"));
+
+Icons are provided by icons8.com.
