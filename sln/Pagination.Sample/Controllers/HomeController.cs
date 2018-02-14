@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Web;
-using System.Web.Mvc;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
-
-using Pagination.Models;
-using Pagination.Sample.Models;
+using System.Web.Mvc;
 
 namespace Pagination.Sample.Controllers {
-    public class HomeController : Controller {
-        public ActionResult Index(SearchModel model) {
+    using Models.Home;
 
-            var factory = new PageSourceFactory {
-                MaxItemsPerPage = 50,
-                DefaultItemsPerPage = 20
+    public class HomeController : Controller {
+        public ActionResult Index(QueryModel query) {
+            var factory = new PageFactory {
+                MaximumItemsRequested = 50,
+                DefaultItemsRequested = 20
             };
 
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -24,18 +20,20 @@ namespace Pagination.Sample.Controllers {
                     }
                     catch (ReflectionTypeLoadException ex) {
                         return ex.Types;
-                    }
-                })
+                    } })
                 .Where(t => t != null)
                 .Select(t => t.FullName)
+                .Distinct()
                 .AsQueryable();
 
-            var searchText = model.SearchText;
+            var searchText = query.SearchText;
             if (!string.IsNullOrWhiteSpace(searchText)) types = types.Where(t => t.Contains(searchText));
 
-            var source = factory.CreateSource(types, model);
+            var page = factory.CreatePage(types.OrderBy(t => t), query);
 
-            return View(source);
+            return View(new IndexModel {
+                Page = page
+            });
         }
     }
 }

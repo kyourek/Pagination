@@ -1,7 +1,8 @@
 ﻿@using Pagination
 @using Pagination.Models
+@using Pagination.Mvc
 @using Pagination.Sample.Models
-@model IPageSourceModel<string, SearchModel>
+@model Pagination.Sample.Models.Home.IndexModel
 
 @{
     var results = Model.OrderBy(s => s).Query();
