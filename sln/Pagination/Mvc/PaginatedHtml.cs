@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using System.Linq;
-using System.Collections.Generic;
 
-using Pagination.Models;
-using Pagination.Abstractions;
+namespace Pagination.Mvc {
+    using Models;
 
-namespace Pagination {
-    
     /// <summary>
     /// Extension methods for instances of <see cref="T:HtmlHelper"/> that interact with Pagination models.
     /// </summary>

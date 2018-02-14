@@ -77,9 +77,9 @@
     <Compile Include="Models\PageSourceModel.cs" />
     <Compile Include="Linking\PrevNextLinker.cs" />
     <Compile Include="Paginated.cs" />
-    <Compile Include="PaginatedHtml.cs" />
+    <Compile Include="Mvc\PaginatedHtml.cs" />
     <Compile Include="PaginatedRequestModel.cs" />
-    <Compile Include="PaginatedUrl.cs" />
+    <Compile Include="Mvc\PaginatedUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

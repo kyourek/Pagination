@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
-using System.Collections.Generic;
-
-using Pagination.Models;
-using Pagination.Abstractions;
 
 namespace Pagination {
+    using Models;
 
     /// <summary>
     /// Extension methods for instances of <see cref="T:UrlHelper"/> that
