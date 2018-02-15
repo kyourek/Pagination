@@ -57,7 +57,6 @@ namespace Pagination {
         public int MaximumItemsRequested { get; set; } = 100;
 
         public IPage<TItem, TQuery> CreatePage<TItem, TQuery>(IOrderedQueryable<TItem> source, TQuery query) {
-            var ctx = Context;
             var def = default(int);
 
             def = DefaultItemsRequested;
