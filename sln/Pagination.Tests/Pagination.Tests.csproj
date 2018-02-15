@@ -65,7 +65,7 @@
     <Compile Include="Linking\DynamicLinkerTests.cs" />
     <Compile Include="Linking\NumberLinkerTests.cs" />
     <Compile Include="Linking\PrevNextLinkerTests.cs" />
-    <Compile Include="PageFactoryTest.cs" />
+    <Compile Include="PageSourceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

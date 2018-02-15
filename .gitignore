@@ -4,5 +4,8 @@ packages
 
 *.suo
 *.user
+*.userprefs
 
 .vs
+.DS_Store
+

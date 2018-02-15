@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Pagination {
-    using Web;
-
-    public class PageFactory {
+    public class PageSource {
         int? GetContextValue(string key) {
             if (ContextValues.TryGetValue(key, out object value)) {
                 if (int.TryParse(value?.ToString(), out int i)) {
@@ -22,7 +20,7 @@ namespace Pagination {
 
         IPageContext _Context;
         public IPageContext Context {
-            get { return _Context ?? (_Context = new HttpPageContext()); }
+            get { return _Context ?? (_Context = new PageContext()); }
             set {
                 if (_Context != value) {
                     _Context = value;
@@ -56,11 +54,23 @@ namespace Pagination {
         public int DefaultItemsRequested { get; set; } = 25;
         public int MaximumItemsRequested { get; set; } = 100;
 
-        public IPage<TItem, TQuery> CreatePage<TItem, TQuery>(IOrderedQueryable<TItem> source, TQuery query) {
+        int? _ItemsRequested;
+        public int? ItemsRequested {
+            get { return _ItemsRequested ?? GetContextValue(ItemsRequestedKey); }
+            set { _ItemsRequested = value; }
+        }
+
+        int? _PageRequested;
+        public int? PageRequested {
+            get { return _PageRequested ?? GetContextValue(PageRequestedKey); }
+            set { _PageRequested = value; }
+        }
+
+        public IPage<TItem, TQuery> FindPage<TItem, TQuery>(IOrderedQueryable<TItem> source, TQuery query) {
             var def = default(int);
 
             def = DefaultItemsRequested;
-            var itemsRequested = GetContextValue(ItemsRequestedKey) ?? def;
+            var itemsRequested = ItemsRequested ?? def;
             if (itemsRequested < 1) itemsRequested = def;
             if (itemsRequested > MaximumItemsRequested) itemsRequested = def;
 
@@ -68,7 +78,7 @@ namespace Pagination {
             var totalPages = (int)Math.Ceiling((double)totalItems / itemsRequested);
 
             def = 0;
-            var pageRequested = GetContextValue(PageRequestedKey) ?? def;
+            var pageRequested = PageRequested ?? def;
             if (pageRequested < 1) pageRequested = def;
 
             var items = source
@@ -87,8 +97,8 @@ namespace Pagination {
             };
         }
 
-        public IPage<TItem> CreatePage<TItem>(IOrderedQueryable<TItem> source) {
-            return CreatePage(source, default(object));
+        public IPage<TItem> FindPage<TItem>(IOrderedQueryable<TItem> source) {
+            return FindPage(source, default(object));
         }
     }
 }

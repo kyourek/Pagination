@@ -61,7 +61,7 @@
     <Compile Include="Linking\NumberLinker.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageChain.cs" />
-    <Compile Include="PageFactory.cs" />
+    <Compile Include="PageSource.cs" />
     <Compile Include="PageLink.cs" />
     <Compile Include="PageLinker.cs" />
     <Compile Include="Linking\PrevNextLinker.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="Web\Mvc\PaginatedHtml.cs" />
     <Compile Include="Web\Mvc\PaginatedUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PageContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="nuget\Printing-One-Page-icon.png" />
