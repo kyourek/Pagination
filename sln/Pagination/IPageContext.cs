@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace Pagination {
+﻿namespace Pagination {
     public interface IPageContext {
-        IDictionary<string, object> GetValues(IEnumerable<string> keys);
+        PageRequest Request { get; }
     }
 }

@@ -10,7 +10,7 @@ namespace Pagination.Linking {
             if (null == page) throw new ArgumentNullException(nameof(page));
 
             var isBase1 = IsBase1;
-            var requestedPage = page.PageRequested;
+            var requestedPage = page.PageBaseZero;
             var totalPageCount = page.PageTotal;
             return Enumerable
                 .Range(0, page.PageTotal)

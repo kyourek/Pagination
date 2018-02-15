@@ -22,7 +22,7 @@ namespace Pagination {
             LowerPage = linkPage;
             UpperPage = linkPage;
             IsPageRange = false;
-            IsRequestedPage = Page.PageRequested == linkPage;
+            IsRequestedPage = Page.PageBaseZero == linkPage;
         }
 
         public PageLink(IPage page, string linkText, int lowerPage, int upperPage) {

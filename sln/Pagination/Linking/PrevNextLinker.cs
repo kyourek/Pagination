@@ -12,7 +12,7 @@ namespace Pagination.Linking {
             if (null == page) throw new ArgumentNullException(nameof(page));
 
             var forcePrevNext = ForcePrevNext;
-            var requestedPage = page.PageRequested;
+            var requestedPage = page.PageBaseZero;
 
             var testPrev = requestedPage > 0;
             if (forcePrevNext || testPrev) {

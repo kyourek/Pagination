@@ -71,6 +71,7 @@
     <Compile Include="Web\Mvc\PaginatedUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PageContext.cs" />
+    <Compile Include="PageRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="nuget\Printing-One-Page-icon.png" />

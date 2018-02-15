@@ -3,7 +3,7 @@
 using NUnit.Framework;
 
 namespace Pagination.Tests {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(PageSource))]
     public class PageSourceTest {
         PageSource _Subject;
         PageSource Subject => _Subject ?? (_Subject = new PageSource { Context = PageContext });
@@ -19,12 +19,12 @@ namespace Pagination.Tests {
 
         [Test]
         public void DefaultItemsRequested_HasDefaultValue() {
-            Assert.AreEqual(25, Subject.DefaultItemsRequested);
+            Assert.AreEqual(25, Subject.ItemsPerPageDefault);
         }
 
         [Test]
         public void MaximumItemsRequested_HasDefaultValue() {
-            Assert.AreEqual(100, Subject.MaximumItemsRequested);
+            Assert.AreEqual(100, Subject.ItemsRequestedMaximum);
         }
 
         [TestCase(0)]
@@ -107,7 +107,25 @@ namespace Pagination.Tests {
                 .OrderBy(item => item);
             var page = Subject.FindPage(source);
             var actual = page.Items;
-            var expected = source.Take(Subject.DefaultItemsRequested);
+            var expected = source.Take(Subject.ItemsPerPageDefault);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        [TestCase(11)]
+        public void FindPage_FinsNthPageOfItems(int n) {
+            Subject.PageRequested = n;
+            var source = Enumerable
+                .Range(0, 1000)
+                .AsQueryable()
+                .OrderBy(item => item);
+            var page = Subject.FindPage(source);
+            var actual = page.Items;
+            var expected = source
+                .Skip(n * Subject.ItemsPerPageDefault)
+                .Take(Subject.ItemsPerPageDefault);
             CollectionAssert.AreEqual(expected, actual);
         }
     }

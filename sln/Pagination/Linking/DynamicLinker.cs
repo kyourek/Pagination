@@ -32,7 +32,7 @@ namespace Pagination.Linking {
 
         public override IEnumerable<PageLink> LinkPages(IPage page) {
             if (page.PageTotal > 1) {
-                var requestedPage = page.PageRequested;
+                var requestedPage = page.PageBaseZero;
                 var totalPageCount = page.PageTotal;
                 var factory = new LinkFactory {
                     IsBase1 = IsBase1,
