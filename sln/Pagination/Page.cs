@@ -1,37 +1,31 @@
 ﻿using System.Linq;
+using System.Web.Routing;
 
 namespace Pagination {
-    public class Page {
-        public int PageRequested { get; }
-        public int PageTotal { get; }
-        public int ItemsRequested { get; }
-        public int ItemsTotal { get; }
-        public IQueryable Items { get; }
-        public object Query { get; }
+    class Page : IPage {
+        public int PageRequested { get; set; }
+        public int PageTotal { get; set; }
+        public int ItemsRequested { get; set; }
+        public int ItemsTotal { get; set; }
+        public IQueryable Items { get; set; }
+        public object Query { get; set; }
+        public string PageRequestedKey { get; set; }
+        public string ItemsRequestedKey { get; set; }
 
-        public Page(int pageRequested, int pageTotal, int itemsRequested, int itemsTotal, IQueryable items, object query) {
-            PageRequested = pageRequested;
-            PageTotal = pageTotal;
-            ItemsRequested = itemsRequested;
-            ItemsTotal = itemsTotal;
-            Items = items;
-            Query = query;
+        public object QueryPage(int? pageRequested = null) {
+            pageRequested = pageRequested ?? PageRequested;
+            var dict = new RouteValueDictionary(Query);
+            dict[PageRequestedKey] = pageRequested;
+            dict[ItemsRequestedKey] = ItemsRequested;
+            return dict;
         }
     }
 
-    public class Page<TItem> : Page {
-        public new IQueryable<TItem> Items { get; }
-
-        public Page(int pageRequested, int pageTotal, int itemsRequested, int itemsTotal, IQueryable<TItem> items, object query) : base(pageRequested, pageTotal, itemsRequested, itemsTotal, items, query) {
-            Items = items;
-        }
+    class Page<TItem> : Page, IPage<TItem> {
+        public new IQueryable<TItem> Items { get; set; }
     }
 
-    public class Page<TItem, TQuery> : Page<TItem> {
-        public new TQuery Query { get; }
-
-        public Page(int pageRequested, int pageTotal, int itemsRequested, int itemsTotal, IQueryable<TItem> items, TQuery query) : base(pageRequested, pageTotal, itemsRequested, itemsTotal, items, query) {
-            Query = query;
-        }
+    class Page<TItem, TQuery> : Page<TItem>, IPage<TItem, TQuery> {
+        public new TQuery Query { get; set; }
     }
 }

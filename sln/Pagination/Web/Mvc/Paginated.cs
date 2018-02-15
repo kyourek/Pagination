@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Linq;
-using System.Collections.Generic;
 
-using Pagination.Models;
-
-namespace Pagination {
-
-    internal class Paginated {
-
+namespace Pagination.Web.Mvc {
+    class Paginated {
         private static string GetRouteValue(RouteValueDictionary values, string key) {
             if (null == values) return null;
             var action = values[key];
@@ -46,13 +40,9 @@ namespace Pagination {
             return GetRouteValue(htmlHelper, "action");
         }
 
-        public static RouteValueDictionary GetRouteValues(IPageLinkModel model) {
-            if (null == model) throw new ArgumentNullException("model");
-
-            var request = model.Request;
-            if (request == null) throw new ArgumentException("The request is null.");
-
-            return request.GetRouteValues(model.LinkPage);
+        public static RouteValueDictionary GetRouteValues(IPageLink pageLink) {
+            var obj = pageLink?.Page?.QueryPage(pageLink?.LinkPage);
+            return new RouteValueDictionary(obj);
         }
     }
 }

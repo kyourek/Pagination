@@ -54,36 +54,21 @@
     <DocumentationFile>bin\Release\Pagination.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IPage.cs" />
+    <Compile Include="IPageContext.cs" />
+    <Compile Include="IPageLink.cs" />
     <Compile Include="Linking\DynamicLinker.cs" />
     <Compile Include="Linking\NumberLinker.cs" />
-    <Compile Include="Models\IOrderedPageSourceModel.cs" />
-    <Compile Include="Abstractions\IOrderedSource.cs" />
-    <Compile Include="Models\IPageChainModel.cs" />
-    <Compile Include="Models\IPageLinkModel.cs" />
-    <Compile Include="Models\IPageSourceModel.cs" />
-    <Compile Include="Abstractions\ISource.cs" />
-    <Compile Include="Abstractions\OrderedSource.cs" />
-    <Compile Include="Abstractions\Source.cs" />
-    <Compile Include="Models\PageChainModel.cs" />
-    <Compile Include="Models\PageLinkModel.cs" />
-    <Compile Include="Models\PageLinkModelBase.cs" />
-    <Compile Include="Models\PageRangeModel.cs" />
     <Compile Include="Page.cs" />
-    <Compile Include="PageContext.cs" />
+    <Compile Include="PageChain.cs" />
     <Compile Include="PageFactory.cs" />
+    <Compile Include="PageLink.cs" />
     <Compile Include="PageLinker.cs" />
-    <Compile Include="PageSourceFactory.cs" />
-    <Compile Include="Models\IPageRequestModel.cs" />
-    <Compile Include="Models\IPageResultsModel.cs" />
-    <Compile Include="Models\OrderedPageSourceModel.cs" />
-    <Compile Include="Models\PageRequestModel.cs" />
-    <Compile Include="Models\PageResultsModel.cs" />
-    <Compile Include="Models\PageSourceModel.cs" />
     <Compile Include="Linking\PrevNextLinker.cs" />
-    <Compile Include="Paginated.cs" />
-    <Compile Include="Mvc\PaginatedHtml.cs" />
-    <Compile Include="PaginatedRequestModel.cs" />
-    <Compile Include="Mvc\PaginatedUrl.cs" />
+    <Compile Include="Web\HttpPageContext.cs" />
+    <Compile Include="Web\Mvc\Paginated.cs" />
+    <Compile Include="Web\Mvc\PaginatedHtml.cs" />
+    <Compile Include="Web\Mvc\PaginatedUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

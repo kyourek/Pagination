@@ -1,56 +1,41 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 
-using Pagination.Models;
-
 namespace Pagination.Linking {
-   
-    internal class PrevNextLinker : PageLinker {
+    class PrevNextLinker : PageLinker {
+        public PageLinker BaseLinker { get; set; }
+        public string PrevText { get; set; }
+        public string NextText { get; set; }
+        public bool ForcePrevNext { get; set; }
 
-        public PageLinker BaseLinker { get { return _BaseLinker; } }
-        private readonly PageLinker _BaseLinker;
+        public override IEnumerable<PageLink> LinkPages(IPage page) {
+            if (null == page) throw new ArgumentNullException(nameof(page));
 
-        public string PrevText { get { return _PrevText; } }
-        private readonly string _PrevText;
-
-        public string NextText { get { return _NextText; } }
-        private readonly string _NextText;
-
-        public bool ForcePrevNext { get { return _ForcePrevNext; } }
-        private readonly bool _ForcePrevNext;
-
-        public PrevNextLinker(PageLinker baseLinker, string prevText, string nextText, bool forcePrevNext) {
-            _PrevText = prevText;
-            _NextText = nextText;
-            _BaseLinker = baseLinker;
-            _ForcePrevNext = forcePrevNext;
-        }
-
-        public override IEnumerable<IPageLinkModel> LinkPages(IPageRequestModel request, IPageResultsModel results) {
-            if (null == request) throw new ArgumentNullException("request");
-            if (null == results) throw new ArgumentNullException("results");
-
-            var list = new List<IPageLinkModel>();
             var forcePrevNext = ForcePrevNext;
-            var requestedPage = request.RequestedPage;
+            var requestedPage = page.PageRequested;
 
             var testPrev = requestedPage > 0;
             if (forcePrevNext || testPrev) {
-                list.Add(new PageLinkModel(request, testPrev ? requestedPage - 1 : requestedPage, PrevText));
+                yield return new PageLink(
+                    page: page, 
+                    linkPage: testPrev ? requestedPage - 1 : requestedPage, 
+                    linkText: PrevText);
             }
 
             var baseLinker = BaseLinker;
             if (baseLinker != null) {
-                list.AddRange(baseLinker.LinkPages(request, results));
+                foreach (var pageLink in BaseLinker.LinkPages(page)) {
+                    yield return pageLink;
+                }
             }
 
-            var testNext = requestedPage < results.TotalPageCount - 1;
+            var testNext = requestedPage < page.PageTotal - 1;
             if (forcePrevNext || testNext) {
-                list.Add(new PageLinkModel(request, testNext ? requestedPage + 1 : requestedPage, NextText));
+                yield return new PageLink(
+                    page: page,
+                    linkPage: testNext ? requestedPage + 1 : requestedPage, 
+                    linkText: NextText);
             }
-
-            return list;
         }
     }
 }
