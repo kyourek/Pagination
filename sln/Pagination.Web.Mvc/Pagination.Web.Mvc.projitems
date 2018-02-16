@@ -12,5 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\Mvc\HtmlHelperExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\Mvc\UrlHelperExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>    
   </ItemGroup>
 </Project>

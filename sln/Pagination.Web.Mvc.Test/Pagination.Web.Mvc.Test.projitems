@@ -10,5 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Web\Mvc\UrlHelperExtensionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>    
   </ItemGroup>
 </Project>

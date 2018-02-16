@@ -14,5 +14,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Web\Routing\PageExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\Routing\PageLinkExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\Routing\PageRouter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>    
   </ItemGroup>
 </Project>

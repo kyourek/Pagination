@@ -26,5 +26,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -33,6 +33,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CBE9A545-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Sample-net40", "Pagination.Sample-net40\Pagination.Sample-net40.csproj", "{CD47F72F-03EE-4C4E-91CA-D6C063D78C09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{7496F7AB-95CA-4D7E-9189-6D6853416FE2}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyVersion.cs = AssemblyVersion.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Pagination.Web.Test\Pagination.Web.Test.projitems*{4298beae-059a-48cf-92f8-a229dc51ce6c}*SharedItemsImports = 4

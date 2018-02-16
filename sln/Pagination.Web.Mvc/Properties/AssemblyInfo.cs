@@ -10,6 +10,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © Ken Yourek 2013-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("2.0.0")]
 [assembly: ComVisible(false)]
 [assembly: InternalsVisibleTo("Pagination.Web.Mvc.Test")]
