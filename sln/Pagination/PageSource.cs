@@ -36,7 +36,7 @@ namespace Pagination {
                 .Skip(itemsPerPage * pageBaseZero)
                 .Take(itemsPerPage);
 
-            return new Page<TItem, TQuery> {
+            return new Page.Of<TItem>.From<TQuery> {
                 Config = conf,
                 Items = items,
                 ItemsPerPage = itemsPerPage,

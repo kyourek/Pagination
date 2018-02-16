@@ -28,7 +28,7 @@
                 </div>
                 <div>
                     <label for="ItemsPerPage">ItemsPerPage</label>
-                    <input type="text" name="ItemsPerPage" value="@Model.Page.ItemsPerPage" />
+                    <input type="text" name="@Model.Page.Config.ItemsPerPageKey" value="@Model.Page.ItemsPerPage" />
                 </div>
                 <div>
                     <input type="submit" value="Submit" />

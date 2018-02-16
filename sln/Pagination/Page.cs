@@ -22,13 +22,19 @@ namespace Pagination {
             set => _Request = value;
         }
         IPageRequest _Request;
-    }
 
-    class Page<TItem> : Page, IPage<TItem> {
-        public new IQueryable<TItem> Items { get; set; }
-    }
+        public class Of<TItem> : Page, IPage<TItem> {
+            public new IQueryable<TItem> Items {
+                get => (IQueryable<TItem>)base.Items;
+                set => base.Items = value;
+            }
 
-    class Page<TItem, TQuery> : Page<TItem>, IPage<TItem, TQuery> {
-        public new TQuery Query { get; set; }
+            public class From<TQuery> : Of<TItem>, IPage<TItem, TQuery> {
+                public new TQuery Query {
+                    get => (TQuery)base.Query;
+                    set => base.Query = value;
+                }
+            }
+        }
     }
 }

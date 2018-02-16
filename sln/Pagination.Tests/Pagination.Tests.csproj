@@ -66,6 +66,8 @@
     <Compile Include="Linking\DynamicLinkerTests.cs" />
     <Compile Include="Linking\NumberLinkerTests.cs" />
     <Compile Include="Linking\PrevNextLinkerTests.cs" />
+    <Compile Include="PageChainTest.cs" />
+    <Compile Include="PageConfigTest.cs" />
     <Compile Include="PageSourceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Routing\PageExtensionTest.cs" />
