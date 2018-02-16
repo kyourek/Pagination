@@ -13,7 +13,7 @@ namespace Pagination.Linking.Tests {
             };
 
             var linker = new NumberLinker { BaseOne = true };
-            var linked = linker.LinkPages(page);
+            var linked = linker.Links(page);
             Assert.AreEqual(17, linked.Count());
             for (var i = 0; i < linked.Count(); i++) {
                 var l = linked.ElementAt(i);
@@ -32,7 +32,7 @@ namespace Pagination.Linking.Tests {
             };
 
             var linker = new NumberLinker();
-            var linked = linker.LinkPages(page);
+            var linked = linker.Links(page);
             Assert.AreEqual(176, linked.Count());
             for (var i = 0; i < linked.Count(); i++) {
                 var l = linked.ElementAt(i);

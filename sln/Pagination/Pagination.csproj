@@ -55,16 +55,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IPage.cs" />
+    <Compile Include="IPageConfig.cs" />
     <Compile Include="IPageLink.cs" />
+    <Compile Include="IPageRequest.cs" />
     <Compile Include="Linking\DynamicLinker.cs" />
     <Compile Include="Linking\NumberLinker.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageChain.cs" />
+    <Compile Include="PageConfig.cs" />
+    <Compile Include="PageExtension.cs" />
     <Compile Include="PageSource.cs" />
     <Compile Include="PageLink.cs" />
     <Compile Include="PageLinker.cs" />
     <Compile Include="Linking\PrevNextLinker.cs" />
-    <Compile Include="Web\HttpPageConfig.cs" />
     <Compile Include="Web\HttpPageContext.cs" />
     <Compile Include="Web\Mvc\HtmlHelperExtension.cs" />
     <Compile Include="Web\Mvc\UrlHelperExtension.cs" />

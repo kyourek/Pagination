@@ -1,53 +1,37 @@
 ﻿namespace Pagination {
     public class PageContext {
-        PageRequest Request {
-            get { return _Request ?? (_Request = GetRequest()); }
-            set { _Request = value; }
-        }
-        PageRequest _Request;
-
-        protected virtual PageRequest GetRequest() {
+        protected virtual IPageRequest GetRequest() {
             return new PageRequest();
         }
 
-        public PageSource Source {
-            get {
-                if (_Source == null) {
-                    _Source = new PageSource {
-                        ItemsPerPage = Request.ItemsPerPage,
-                        PageBaseZero = Request.PageBaseZero
-                    };
-                }
-                return _Source;
-            }
-            set {
-                _Source = value;
-            }
-        }
-        PageSource _Source;
+        public IPageConfig Config => _Config;
+        readonly PageConfig _Config = new PageConfig();
 
-        public PageContext ItemsPerPageDefault(int value) {
-            return new PageContext {
-                Request = Request,
-                Source = new PageSource {
-                    ItemsPerPage = Request.ItemsPerPage,
-                    PageBaseZero = Request.PageBaseZero,
-                    ItemsPerPageDefault = value,
-                    ItemsPerPageMaximum = Source.ItemsPerPageMaximum
-                }
+        public PageSource GetSource() {
+            return new PageSource {
+                Config = Config,
+                Request = GetRequest()
             };
         }
 
-        public PageContext ItemsPerPageMaximum(int value) {
-            return new PageContext {
-                Request = Request,
-                Source = new PageSource {
-                    ItemsPerPage = Request.ItemsPerPage,
-                    PageBaseZero = Request.PageBaseZero,
-                    ItemsPerPageDefault = Source.ItemsPerPageDefault,
-                    ItemsPerPageMaximum = value
-                }
-            };
+        public PageContext SetItemsPerPageDefault(int value) {
+            _Config.ItemsPerPageDefault = value;
+            return this;
+        }
+
+        public PageContext SetItemsPerPageMaximum(int value) {
+            _Config.ItemsPerPageMaximum = value;
+            return this;
+        }
+
+        public PageContext SetItemsPerPageKey(string value) {
+            _Config.ItemsPerPageKey = value;
+            return this;
+        }
+
+        public PageContext SetPageBaseZeroKey(string value) {
+            _Config.PageBaseZeroKey = value;
+            return this;
         }
     }
 }

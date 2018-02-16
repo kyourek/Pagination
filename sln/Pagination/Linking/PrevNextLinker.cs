@@ -8,7 +8,7 @@ namespace Pagination.Linking {
         public string NextText { get; set; }
         public bool ForcePrevNext { get; set; }
 
-        public override IEnumerable<PageLink> LinkPages(IPage page) {
+        public override IEnumerable<IPageLink> Links(IPage page) {
             if (null == page) throw new ArgumentNullException(nameof(page));
 
             var forcePrevNext = ForcePrevNext;
@@ -24,7 +24,7 @@ namespace Pagination.Linking {
 
             var baseLinker = BaseLinker;
             if (baseLinker != null) {
-                foreach (var pageLink in BaseLinker.LinkPages(page)) {
+                foreach (var pageLink in BaseLinker.Links(page)) {
                     yield return pageLink;
                 }
             }

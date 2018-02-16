@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pagination {
     using Linking;
 
-    abstract class PageLinker {
-        public static PageLinker Default {
-            get {
-                if (null == _Default) _Default = Create();
-                return _Default;
-            }
-            set {
-                if (null == value) throw new ArgumentNullException("Default");
-                _Default = value;
-            }
+    public abstract class PageLinker {
+        public abstract IEnumerable<IPageLink> Links(IPage page);
+
+        public PageChain Chain(IPage page) {
+            return new PageChain(
+                itemsTotal: page.ItemsTotal, 
+                pageTotal: page.PageTotal, 
+                links: Links(page));
         }
-        private static PageLinker _Default;
 
-        public abstract IEnumerable<PageLink> LinkPages(IPage page);
-
-        public static PageLinker Create(bool isBase1, string prevText, string nextText, bool forcePrevNext) {
-            var baseLinker = new NumberLinker { BaseOne = isBase1 };
+        public static PageLinker Create(bool baseOne, string prevText, string nextText, bool forcePrevNext) {
+            var baseLinker = new NumberLinker { BaseOne = baseOne };
             if (string.IsNullOrEmpty(prevText) && string.IsNullOrEmpty(nextText)) {
                 return baseLinker;
             }
@@ -32,24 +26,24 @@ namespace Pagination {
             };
         }
 
-        public static PageLinker Create(bool isBase1, string prevText, string nextText) {
-            return Create(isBase1, prevText, nextText, true);
+        public static PageLinker Create(bool baseOne, string prevText, string nextText) {
+            return Create(baseOne, prevText, nextText, true);
         }
 
         public static PageLinker Create(string prevText, string nextText) {
             return Create(true, prevText, nextText);
         }
 
-        public static PageLinker Create(bool isBase1) {
-            return Create(isBase1, null, null, false);
+        public static PageLinker Create(bool baseOne) {
+            return Create(baseOne, null, null, false);
         }
 
         public static PageLinker Create() {
             return Create(true);
         }
 
-        public static PageLinker CreateDynamic(bool isBase1, string prevText, string nextText, bool forcePrevNext) {
-            var baseLinker = new DynamicLinker { BaseOne = isBase1 };
+        public static PageLinker CreateDynamic(bool baseOne, string prevText, string nextText, bool forcePrevNext) {
+            var baseLinker = new DynamicLinker { BaseOne = baseOne };
             if (string.IsNullOrEmpty(prevText) && string.IsNullOrEmpty(nextText)) {
                 return baseLinker;
             }
@@ -61,16 +55,16 @@ namespace Pagination {
             };
         }
 
-        public static PageLinker CreateDynamic(bool isBase1, string prevText, string nextText) {
-            return CreateDynamic(isBase1, prevText, nextText, true);
+        public static PageLinker CreateDynamic(bool baseOne, string prevText, string nextText) {
+            return CreateDynamic(baseOne, prevText, nextText, true);
         }
 
         public static PageLinker CreateDynamic(string prevText, string nextText) {
             return CreateDynamic(true, prevText, nextText);
         }
 
-        public static PageLinker CreateDynamic(bool isBase1) {
-            return CreateDynamic(isBase1, null, null, false);
+        public static PageLinker CreateDynamic(bool baseOne) {
+            return CreateDynamic(baseOne, null, null, false);
         }
 
         public static PageLinker CreateDynamic() {

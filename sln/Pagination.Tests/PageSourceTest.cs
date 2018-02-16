@@ -8,37 +8,12 @@ namespace Pagination.Tests {
         PageSource _Subject;
         PageSource Subject => _Subject ?? (_Subject = new PageSource());
 
+        PageConfig PageConfig => (PageConfig)Subject.Config;
+        PageRequest PageRequest => (PageRequest)Subject.Request;
+
         [TearDown]
         public void TearDown() {
             _Subject = null;
-        }
-
-        [Test]
-        public void ItemsPerPageDefault_HasDefaultValue() {
-            Assert.AreEqual(25, Subject.ItemsPerPageDefault);
-        }
-
-        [Test]
-        public void ItemsPerPageMaximum_HasDefaultValue() {
-            Assert.AreEqual(100, Subject.ItemsPerPageMaximum);
-        }
-
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(15)]
-        [TestCase(777)]
-        public void PageBaseZero_CanBeSetArbitrarily(int value) {
-            Subject.PageBaseZero = value;
-            Assert.AreEqual(value, Subject.PageBaseZero);
-        }
-
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(15)]
-        [TestCase(777)]
-        public void ItemsPerPage_CanBeSetArbitrarily(int value) {
-            Subject.ItemsPerPage = value;
-            Assert.AreEqual(value, Subject.ItemsPerPage);
         }
 
         [Test]
@@ -49,7 +24,7 @@ namespace Pagination.Tests {
                 .OrderBy(item => item);
             var page = Subject.FindPage(source);
             var actual = page.Items;
-            var expected = source.Take(Subject.ItemsPerPageDefault);
+            var expected = source.Take(Subject.Config.ItemsPerPageDefault);
             CollectionAssert.AreEqual(expected, actual);
         }
 
@@ -58,7 +33,7 @@ namespace Pagination.Tests {
         [TestCase(10)]
         [TestCase(11)]
         public void FindPage_FinsNthPageOfItems(int n) {
-            Subject.PageBaseZero = n;
+            PageRequest.PageBaseZero = n;
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
@@ -66,8 +41,8 @@ namespace Pagination.Tests {
             var page = Subject.FindPage(source);
             var actual = page.Items;
             var expected = source
-                .Skip(n * Subject.ItemsPerPageDefault)
-                .Take(Subject.ItemsPerPageDefault);
+                .Skip(n * Subject.Config.ItemsPerPageDefault)
+                .Take(Subject.Config.ItemsPerPageDefault);
             CollectionAssert.AreEqual(expected, actual);
         }
     }

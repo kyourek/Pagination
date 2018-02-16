@@ -1,15 +1,9 @@
 ﻿@using Pagination
-@using Pagination.Models
-@using Pagination.Mvc
-@using Pagination.Sample.Models
+@using Pagination.Web.Mvc
 @model Pagination.Sample.Models.Home.IndexModel
-
-@{
-    var results = Model.OrderBy(s => s).Query();
-    var items = results.Results.Select(r => new { TypeName = r });
-    var pages = results.LinkPages(PageLinker.CreateDynamic(true, "←", "→"));
+@{ 
+    var pageChain = Model.Page.Chain(PageLinker.CreateDynamic("<", ">"));
 }
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,11 +24,11 @@
             <form action="#" method="get">
                 <div>
                     <label for="SearchText">Search Text</label>
-                    <input type="text" name="SearchText" id="SearchText" value="@Model.Request.SearchText" />
+                    <input type="text" name="SearchText" value="@Model.Page.Query.SearchText" />
                 </div>
                 <div>
                     <label for="ItemsPerPage">ItemsPerPage</label>
-                    <input type="text" name="ItemsPerPage" id="ItemsPerPage" value="@Model.Request.ItemsPerPage" />
+                    <input type="text" name="ItemsPerPage" value="@Model.Page.ItemsPerPage" />
                 </div>
                 <div>
                     <input type="submit" value="Submit" />
@@ -42,29 +36,29 @@
             </form>
         </div>
         <div> 
-            <p>@pages.TotalItemCount items on @pages.TotalPageCount @(pages.TotalPageCount == 1 ? "page" : "pages")</p>
-            <p>Current Page: @pages.First(p => p.IsRequestedPage).LinkPageBase1</p>
+            <p>@Model.Page.ItemsTotal items on @Model.Page.PageTotal @(Model.Page.PageTotal == 1 ? "page" : "pages")</p>
+            <p>Current Page: @(Model.Page.PageBaseZero + 1)</p>
             <ul class="pages">
-                @foreach (var page in pages) {
-                    if (page.IsPageRange) {
+                @foreach (var link in pageChain.Links) {
+                    if (link.IsPageRange) {
                         <li>...</li>
                     }
                     else {
-                        if (page.IsRequestedPage) {
-                            <li><strong>@page.LinkText</strong></li>
+                        if (link.IsRequestedPage) {
+                            <li><strong>@link.LinkText</strong></li>
                         }
                         else {
-                            <li>@Html.PageLink(page)</li>
+                            <li>@Html.PageLink(link)</li>
                         }
                     }
                 }
             </ul>
-            @Html.Partial("Pagination/Bootstrap", pages);
+            @Html.Partial("Pagination/Bootstrap", pageChain.Links);
         </div>
         <div>
             <ul>
-                @foreach (var item in items) {
-                    <li>@item.TypeName</li>
+                @foreach (var item in Model.Page.Items) {
+                    <li>@item</li>
                 }
             </ul>
         </div>

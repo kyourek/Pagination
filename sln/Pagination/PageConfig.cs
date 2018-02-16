@@ -1,6 +1,7 @@
-﻿namespace Pagination.Web {
-    public class HttpPageConfig {
-        public static HttpPageConfig Default { get; } = new HttpPageConfig();
+﻿namespace Pagination {
+    class PageConfig : IPageConfig {
+        public int ItemsPerPageDefault { get; set; } = 25;
+        public int ItemsPerPageMaximum { get; set; } = 100;
 
         public string ItemsPerPageKey {
             get => _ItemsPerPageKey ?? (_ItemsPerPageKey = "_p_ipp");

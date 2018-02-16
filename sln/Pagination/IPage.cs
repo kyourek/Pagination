@@ -3,11 +3,14 @@
 namespace Pagination {
     public interface IPage {
         int PageBaseZero { get; }
+        int PageBaseOne { get; }
         int PageTotal { get; }
         int ItemsPerPage { get; }
         int ItemsTotal { get; }
         IQueryable Items { get; }
         object Query { get; }
+        IPageConfig Config { get; }
+        IPageRequest Request { get; }
     }
 
     public interface IPage<TItem> : IPage {

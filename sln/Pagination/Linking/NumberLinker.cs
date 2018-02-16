@@ -6,7 +6,7 @@ namespace Pagination.Linking {
     class NumberLinker : PageLinker {
         public bool BaseOne { get; set; }
 
-        public override IEnumerable<PageLink> LinkPages(IPage page) {
+        public override IEnumerable<IPageLink> Links(IPage page) {
             if (null == page) throw new ArgumentNullException(nameof(page));
 
             var baseOne = BaseOne;

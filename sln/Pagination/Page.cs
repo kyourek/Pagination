@@ -8,6 +8,20 @@ namespace Pagination {
         public int ItemsTotal { get; set; }
         public IQueryable Items { get; set; }
         public object Query { get; set; }
+
+        public int PageBaseOne => PageBaseZero + 1;
+
+        public IPageConfig Config {
+            get => _Config ?? (_Config = new PageConfig());
+            set => _Config = value;
+        }
+        IPageConfig _Config;
+
+        public IPageRequest Request {
+            get => _Request ?? (_Request = new PageRequest());
+            set => _Request = value;
+        }
+        IPageRequest _Request;
     }
 
     class Page<TItem> : Page, IPage<TItem> {

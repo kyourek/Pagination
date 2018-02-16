@@ -13,9 +13,10 @@ namespace Pagination.Linking.Tests {
                 PrevText = "prev"
             };
 
-            var page = new PageSource { ItemsPerPage = 10, PageBaseZero = 2 }
-                .FindPage(Enumerable.Range(1, 50).AsQueryable().OrderBy(i => i));
-            var linkedPages = linker.LinkPages(page);
+            var req = new PageRequest { ItemsPerPage = 10, PageBaseZero = 2 };
+            var src = new PageSource { Request = req };
+            var page = src.FindPage(Enumerable.Range(1, 50).AsQueryable().OrderBy(i => i));
+            var linkedPages = linker.Links(page);
             Assert.IsNotNull(linkedPages);
             Assert.AreEqual(2, linkedPages.Count());
 

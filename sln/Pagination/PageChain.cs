@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 
 namespace Pagination {
-    class PageChain {
-        public IEnumerable<PageLink> Links { get; }
-        public int TotalItems { get; }
-        public int TotalPages { get; }
+    public class PageChain {
+        public IEnumerable<IPageLink> Links { get; }
+        public int PageTotal { get; }
+        public int ItemsTotal { get; }
 
-        public PageChain(int totalPages, int totalItems, IEnumerable<PageLink> links) {
+        public PageChain(int itemsTotal, int pageTotal, IEnumerable<IPageLink> links) {
             Links = links ?? new PageLink[] { };
-            TotalPages = totalPages;
-            TotalItems = totalItems;
+            PageTotal = pageTotal;
+            ItemsTotal = itemsTotal;
         }
     }
 }

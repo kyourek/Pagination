@@ -13,7 +13,7 @@ namespace Pagination.Linking.Tests {
                 PageTotal = 56
             };
 
-            var linked = linker.LinkPages(page);
+            var linked = linker.Links(page);
             Assert.IsNotNull(linked);
 
             var p0 = linked.ElementAt(0);
