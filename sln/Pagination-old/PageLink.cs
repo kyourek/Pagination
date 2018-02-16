@@ -1,0 +1,33 @@
+﻿using System;
+
+namespace Pagination {
+    class PageLink : IPageLink {
+        public int LinkPageBaseZero { get; }
+        public int LowerPageBaseZero { get; }
+        public int UpperPageBaseZero { get; }
+        public bool IsPageRange { get; }
+        public bool IsRequestedPage { get; }
+        public string LinkText { get; }
+        public IPage Page { get; }
+
+        public PageLink(IPage page, int linkPageBaseZero, string linkText) {
+            Page = page ?? throw new ArgumentNullException(nameof(page));
+            LinkPageBaseZero = linkPageBaseZero;
+            LinkText = linkText;
+            LowerPageBaseZero = linkPageBaseZero;
+            UpperPageBaseZero = linkPageBaseZero;
+            IsPageRange = false;
+            IsRequestedPage = Page.PageBaseZero == linkPageBaseZero;
+        }
+
+        public PageLink(IPage page, string linkText, int lowerPageBaseZero, int upperPageBaseZero) {
+            Page = page ?? throw new ArgumentNullException(nameof(page));
+            LinkPageBaseZero = lowerPageBaseZero;
+            LinkText = linkText;
+            LowerPageBaseZero = lowerPageBaseZero;
+            UpperPageBaseZero = upperPageBaseZero;
+            IsPageRange = true;
+            IsRequestedPage = false;
+        }
+    }
+}

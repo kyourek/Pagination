@@ -2,19 +2,14 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Pagination")]
-[assembly: AssemblyDescription("Pagination")]
+[assembly: AssemblyTitle("Pagination.Web.Mvc")]
+[assembly: AssemblyDescription("Pagination Web MVC")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ken Yourek")]
-[assembly: AssemblyProduct("Pagination")]
+[assembly: AssemblyProduct("Pagination.Web.Mvc")]
 [assembly: AssemblyCopyright("Copyright © Ken Yourek 2013-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-[assembly: ComVisible(false)]
-
 [assembly: AssemblyVersion("2.0.0")]
-
-[assembly: InternalsVisibleTo("Pagination.Test")]
-[assembly: InternalsVisibleTo("Pagination.Web")]
-[assembly: InternalsVisibleTo("Pagination.Web.Test")]
+[assembly: ComVisible(false)]
+[assembly: InternalsVisibleTo("Pagination.Web.Mvc.Test")]

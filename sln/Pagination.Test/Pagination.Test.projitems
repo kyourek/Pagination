@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>5aff1d4b-c988-44e4-b200-4ed7674a6d60</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Pagination.Test</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Linking\DynamicLinkerTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linking\NumberLinkerTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linking\PrevNextLinkerTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageChainTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageConfigTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageSourceTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+</Project>
