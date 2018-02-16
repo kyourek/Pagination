@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Web;
 
 namespace Pagination.Web {
-    class HttpPageContext : IPageContext {
+    class HttpPageContext : PageContext {
         static void Copy(IDictionary<string, object> dict, NameValueCollection coll, HashSet<string> keys) {
             var names = coll?.AllKeys;
             if (names != null) {
@@ -15,6 +15,10 @@ namespace Pagination.Web {
                     }
                 }
             }
+        }
+
+        protected override PageRequest GetRequest() {
+            throw new NotImplementedException();
         }
 
         HttpContextWrapper _Http;

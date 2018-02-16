@@ -55,7 +55,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IPage.cs" />
-    <Compile Include="IPageContext.cs" />
     <Compile Include="IPageLink.cs" />
     <Compile Include="Linking\DynamicLinker.cs" />
     <Compile Include="Linking\NumberLinker.cs" />

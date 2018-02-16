@@ -41,8 +41,7 @@ namespace Pagination.Web.Mvc {
         }
 
         public static RouteValueDictionary GetRouteValues(IPageLink pageLink) {
-            var obj = pageLink?.Page?.QueryPage(pageLink?.LinkPage);
-            return new RouteValueDictionary(obj);
+            throw new NotImplementedException();
         }
     }
 }
