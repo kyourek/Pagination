@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Pagination</id>
-    <version>0.0.0</version>
+    <version>2.0.0-alpha</version>
     <authors>Ken Yourek</authors>
     <owners>Ken Yourek</owners>
     <licenseUrl>https://raw.githubusercontent.com/kyourek/Pagination/master/LICENSE</licenseUrl>
@@ -10,8 +10,8 @@
     <iconUrl>https://raw.githubusercontent.com/kyourek/Pagination/master/sln/Pagination/nuget/Printing-One-Page-icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Pagination offers easy control over paged results from IQueryable sources.</description>
-    <releaseNotes>Combined core and MVC functionality into a single assembly.</releaseNotes>
-    <copyright>Copyright Ken Yourek 2013-2014</copyright>
+    <releaseNotes>Pagination 2.0 is a complete rewrite with breaking changes.</releaseNotes>
+    <copyright>Copyright Ken Yourek 2013-2018</copyright>
     <tags>Pagination Paging Pages Pager LINQ</tags>
   </metadata>
 </package>
