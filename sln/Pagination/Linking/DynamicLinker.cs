@@ -4,38 +4,40 @@ namespace Pagination.Linking {
     class DynamicLinker : PageLinker {
         class LinkFactory {
             public IPage Page { get; set; }
-            public bool IsBase1 { get; set; }
+            public bool BaseOne { get; set; }
 
-            public PageLink CreateLink(int page, string text) {
+            public PageLink CreateLink(int pageBaseZero, string text) {
                 return new PageLink(
                     page: Page, 
-                    linkPage: page, 
+                    linkPageBaseZero: pageBaseZero, 
                     linkText: text);
             }
 
-            public PageLink CreateLink(int page) {
+            public PageLink CreateLink(int pageBaseZero) {
                 return CreateLink(
-                    page: page, 
-                    text: IsBase1 ? (page + 1).ToString() : page.ToString());
+                    pageBaseZero: pageBaseZero, 
+                    text: BaseOne 
+                        ? (pageBaseZero + 1).ToString() 
+                        : pageBaseZero.ToString());
             }
 
-            public PageLink CreateRange(int lower, int upper) {
+            public PageLink CreateRange(int lowerPageBaseZero, int upperPageBaseZero) {
                 return new PageLink(
                     page: Page,
                     linkText: "...",
-                    lowerPage: lower,
-                    upperPage: upper);
+                    lowerPageBaseZero: lowerPageBaseZero,
+                    upperPageBaseZero: upperPageBaseZero);
             }
         }
 
-        public bool IsBase1 { get; set; }
+        public bool BaseOne { get; set; }
 
         public override IEnumerable<PageLink> LinkPages(IPage page) {
             if (page.PageTotal > 1) {
                 var requestedPage = page.PageBaseZero;
                 var totalPageCount = page.PageTotal;
                 var factory = new LinkFactory {
-                    IsBase1 = IsBase1,
+                    BaseOne = BaseOne,
                     Page = page
                 };
 

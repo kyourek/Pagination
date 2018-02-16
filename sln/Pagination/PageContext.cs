@@ -1,10 +1,10 @@
 ﻿namespace Pagination {
     public class PageContext {
-        PageRequest _Request;
         PageRequest Request {
             get { return _Request ?? (_Request = GetRequest()); }
             set { _Request = value; }
         }
+        PageRequest _Request;
 
         protected virtual PageRequest GetRequest() {
             return new PageRequest();

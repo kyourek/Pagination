@@ -18,7 +18,7 @@ namespace Pagination.Linking {
             if (forcePrevNext || testPrev) {
                 yield return new PageLink(
                     page: page, 
-                    linkPage: testPrev ? requestedPage - 1 : requestedPage, 
+                    linkPageBaseZero: testPrev ? requestedPage - 1 : requestedPage, 
                     linkText: PrevText);
             }
 
@@ -33,7 +33,7 @@ namespace Pagination.Linking {
             if (forcePrevNext || testNext) {
                 yield return new PageLink(
                     page: page,
-                    linkPage: testNext ? requestedPage + 1 : requestedPage, 
+                    linkPageBaseZero: testNext ? requestedPage + 1 : requestedPage, 
                     linkText: NextText);
             }
         }

@@ -2,35 +2,30 @@
 
 namespace Pagination {
     class PageLink : IPageLink {
-        public int LinkPage { get; }
-        public int LinkPageBase0 => LinkPage;
-        public int LinkPageBase1 => LinkPage + 1;
-
-        public int LowerPage { get; }
-        public int UpperPage { get; }
+        public int LinkPageBaseZero { get; }
+        public int LowerPageBaseZero { get; }
+        public int UpperPageBaseZero { get; }
         public bool IsPageRange { get; }
         public bool IsRequestedPage { get; }
-
         public string LinkText { get; }
-
         public IPage Page { get; }
 
-        public PageLink(IPage page, int linkPage, string linkText) {
+        public PageLink(IPage page, int linkPageBaseZero, string linkText) {
             Page = page ?? throw new ArgumentNullException(nameof(page));
-            LinkPage = linkPage;
+            LinkPageBaseZero = linkPageBaseZero;
             LinkText = linkText;
-            LowerPage = linkPage;
-            UpperPage = linkPage;
+            LowerPageBaseZero = linkPageBaseZero;
+            UpperPageBaseZero = linkPageBaseZero;
             IsPageRange = false;
-            IsRequestedPage = Page.PageBaseZero == linkPage;
+            IsRequestedPage = Page.PageBaseZero == linkPageBaseZero;
         }
 
-        public PageLink(IPage page, string linkText, int lowerPage, int upperPage) {
+        public PageLink(IPage page, string linkText, int lowerPageBaseZero, int upperPageBaseZero) {
             Page = page ?? throw new ArgumentNullException(nameof(page));
-            LinkPage = lowerPage;
+            LinkPageBaseZero = lowerPageBaseZero;
             LinkText = linkText;
-            LowerPage = lowerPage;
-            UpperPage = upperPage;
+            LowerPageBaseZero = lowerPageBaseZero;
+            UpperPageBaseZero = upperPageBaseZero;
             IsPageRange = true;
             IsRequestedPage = false;
         }

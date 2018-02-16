@@ -1,42 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Web;
 
 namespace Pagination.Web {
     class HttpPageContext : PageContext {
-        static void Copy(IDictionary<string, object> dict, NameValueCollection coll, HashSet<string> keys) {
-            var names = coll?.AllKeys;
-            if (names != null) {
-                foreach (var name in names) {
-                    if (keys.Contains(name)) {
-                        keys.Remove(name);
-                        dict[name] = coll[name];
-                    }
+        static int? GetValue(NameValueCollection collection, string name) {
+            if (collection != null) {
+                if (int.TryParse(collection[name], out int i)) {
+                    return i;
                 }
             }
+            return null;
+        }
+
+        private PageRequest FillRequest(NameValueCollection collection, PageRequest request = null) {
+            request = request ?? new PageRequest();
+            request.ItemsPerPage = GetValue(collection, ItemsPerPageKey) ?? request.ItemsPerPage;
+            request.PageBaseZero = GetValue(collection, PageBaseZeroKey) ?? request.PageBaseZero;
+            return request;
         }
 
         protected override PageRequest GetRequest() {
-            throw new NotImplementedException();
-        }
-
-        HttpContextWrapper _Http;
-        public HttpContextWrapper Http {
-            get { return _Http ?? (_Http = new HttpContextWrapper(HttpContext.Current)); }
-            set { _Http = value; }
-        }
-
-        public IDictionary<string, object> GetValues(IEnumerable<string> keys) {
             var http = Http;
-            var dict = new Dictionary<string, object>();
-            var request = http.Request;
-            var keyList = new HashSet<string>(keys, StringComparer.OrdinalIgnoreCase);
-
-            Copy(dict, request?.Form, keyList);
-            Copy(dict, request?.QueryString, keyList);
-
-            return dict;
+            var request = http?.Request;
+            return 
+                FillRequest(request?.Form,
+                FillRequest(request?.QueryString));
         }
+
+        public string ItemsPerPageKey {
+            get => _ItemsPerPageKey ?? (_ItemsPerPageKey = HttpPageConfig.Default.ItemsPerPageKey);
+            set => _ItemsPerPageKey = value;
+        }
+        string _ItemsPerPageKey;
+
+        public string PageBaseZeroKey {
+            get => _PageBaseZeroKey ?? (_PageBaseZeroKey = HttpPageConfig.Default.PageBaseZeroKey);
+            set => _PageBaseZeroKey = value;
+        }
+        string _PageBaseZeroKey;
+
+        public HttpContextWrapper Http {
+            get => _Http ?? (_Http = new HttpContextWrapper(HttpContext.Current));
+            set => _Http = value;
+        }
+        HttpContextWrapper _Http;
     }
 }

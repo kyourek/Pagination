@@ -64,13 +64,16 @@
     <Compile Include="PageLink.cs" />
     <Compile Include="PageLinker.cs" />
     <Compile Include="Linking\PrevNextLinker.cs" />
+    <Compile Include="Web\HttpPageConfig.cs" />
     <Compile Include="Web\HttpPageContext.cs" />
-    <Compile Include="Web\Mvc\Paginated.cs" />
-    <Compile Include="Web\Mvc\PaginatedHtml.cs" />
-    <Compile Include="Web\Mvc\PaginatedUrl.cs" />
+    <Compile Include="Web\Mvc\HtmlHelperExtension.cs" />
+    <Compile Include="Web\Mvc\UrlHelperExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PageContext.cs" />
     <Compile Include="PageRequest.cs" />
+    <Compile Include="Web\Routing\PageExtension.cs" />
+    <Compile Include="Web\Routing\PageLinkExtension.cs" />
+    <Compile Include="Web\Routing\PageRouter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="nuget\Printing-One-Page-icon.png" />

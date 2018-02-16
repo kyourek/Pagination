@@ -20,7 +20,7 @@ namespace Pagination {
         public abstract IEnumerable<PageLink> LinkPages(IPage page);
 
         public static PageLinker Create(bool isBase1, string prevText, string nextText, bool forcePrevNext) {
-            var baseLinker = new NumberLinker { IsBase1 = isBase1 };
+            var baseLinker = new NumberLinker { BaseOne = isBase1 };
             if (string.IsNullOrEmpty(prevText) && string.IsNullOrEmpty(nextText)) {
                 return baseLinker;
             }
@@ -49,7 +49,7 @@ namespace Pagination {
         }
 
         public static PageLinker CreateDynamic(bool isBase1, string prevText, string nextText, bool forcePrevNext) {
-            var baseLinker = new DynamicLinker { IsBase1 = isBase1 };
+            var baseLinker = new DynamicLinker { BaseOne = isBase1 };
             if (string.IsNullOrEmpty(prevText) && string.IsNullOrEmpty(nextText)) {
                 return baseLinker;
             }
