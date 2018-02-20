@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Pagination.Web</id>
+    <id>Pagination.Web.Mvc</id>
     <version>2.0.0-alpha1</version>
     <authors>Ken Yourek</authors>
     <description>Pagination offers easy control over paged results from IQueryable sources.</description>
