@@ -45,16 +45,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{A2817AC6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Test-net45", "Pagination.Test-net45\Pagination.Test-net45.csproj", "{06862401-386F-43C5-B52F-FB189B2BB2FE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{95F9BE95-E62E-4DCE-A6BF-6F49FB46DDB6}"
+	ProjectSection(SolutionItems) = preProject
+		Pagination.nuspec = Pagination.nuspec
+		Pagination.Web.Mvc.nuspec = Pagination.Web.Mvc.nuspec
+		Pagination.Web.nuspec = Pagination.Web.nuspec
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web-net45", "Pagination.Web-net45\Pagination.Web-net45.csproj", "{3CB83842-90EF-44AC-8F99-BB64D05A80C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Mvc-net45", "Pagination.Web.Mvc-net45\Pagination.Web.Mvc-net45.csproj", "{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Pagination.Test\Pagination.Test.projitems*{06862401-386f-43c5-b52f-fb189b2bb2fe}*SharedItemsImports = 4
 		Pagination\Pagination.projitems*{2afea374-0e0b-443d-ac9e-ebff4bc673f6}*SharedItemsImports = 4
+		Pagination.Web\Pagination.Web.projitems*{3cb83842-90ef-44ac-8f99-bb64d05a80c3}*SharedItemsImports = 4
 		Pagination.Web.Test\Pagination.Web.Test.projitems*{4298beae-059a-48cf-92f8-a229dc51ce6c}*SharedItemsImports = 4
 		Pagination\Pagination.projitems*{483ca936-e9dd-4e85-9192-5f0ed62a3273}*SharedItemsImports = 4
 		Pagination.Web.Mvc\Pagination.Web.Mvc.projitems*{59352b19-3803-4d78-bd56-0e995bd337a6}*SharedItemsImports = 4
 		Pagination.Test\Pagination.Test.projitems*{5aff1d4b-c988-44e4-b200-4ed7674a6d60}*SharedItemsImports = 13
 		Pagination.Web.Mvc.Test\Pagination.Web.Mvc.Test.projitems*{602db3b6-f519-47de-99e6-455378ad9d5c}*SharedItemsImports = 13
 		Pagination.Web\Pagination.Web.projitems*{68da07c2-151f-4285-aa49-f4e48e368340}*SharedItemsImports = 13
+		Pagination.Web.Mvc\Pagination.Web.Mvc.projitems*{833f4ca1-8e0c-412a-ab60-d47dfeb43a4b}*SharedItemsImports = 4
 		Pagination.Web\Pagination.Web.projitems*{88d72793-0572-489c-8ef7-0c4dd3758be7}*SharedItemsImports = 4
 		Pagination.Web.Test\Pagination.Web.Test.projitems*{97257b60-477c-4fa1-8d53-e2f44d670d3c}*SharedItemsImports = 13
 		Pagination.Web.Mvc\Pagination.Web.Mvc.projitems*{a189574b-1bda-4763-80b0-7ce0a1781bcf}*SharedItemsImports = 13
@@ -111,6 +124,14 @@ Global
 		{06862401-386F-43C5-B52F-FB189B2BB2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06862401-386F-43C5-B52F-FB189B2BB2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06862401-386F-43C5-B52F-FB189B2BB2FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB83842-90EF-44AC-8F99-BB64D05A80C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB83842-90EF-44AC-8F99-BB64D05A80C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB83842-90EF-44AC-8F99-BB64D05A80C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB83842-90EF-44AC-8F99-BB64D05A80C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +151,8 @@ Global
 		{5C26CD80-E857-4B93-AD2C-CE525C26FC40} = {135FAFB9-AE44-4E28-8620-3BB17DA61B26}
 		{2AFEA374-0E0B-443D-AC9E-EBFF4BC673F6} = {A2817AC6-1623-440B-867C-E5139838B66F}
 		{06862401-386F-43C5-B52F-FB189B2BB2FE} = {A2817AC6-1623-440B-867C-E5139838B66F}
+		{3CB83842-90EF-44AC-8F99-BB64D05A80C3} = {A2817AC6-1623-440B-867C-E5139838B66F}
+		{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B} = {A2817AC6-1623-440B-867C-E5139838B66F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B05F6DC4-B656-49FA-8764-E8B3B3828724}

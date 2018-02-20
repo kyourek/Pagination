@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Pagination.Web</id>
+    <version>2.0.0-alpha1</version>
+    <authors>Ken Yourek</authors>
+    <description>Pagination offers easy control over paged results from IQueryable sources.</description>
+    <projectUrl>https://github.com/kyourek/Pagination</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/kyourek/Pagination/master/LICENSE</licenseUrl>
+    <dependencies>
+      <dependency id="Pagination" version="2.0.0-alpha1"/>
+      <dependency id="Pagination.Web" version="2.0.0-alpha1"/>
+      <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1"/>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System"/>
+      <frameworkAssembly assemblyName="System.Web"/>
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="Pagination.Web.Mvc-net40/bin/Release/Pagination.Web.Mvc.dll" target="lib/net40"/>
+    <file src="Pagination.Web.Mvc-net45/bin/Release/Pagination.Web.Mvc.dll" target="lib/net45"/>
+  </files>
+</package>
