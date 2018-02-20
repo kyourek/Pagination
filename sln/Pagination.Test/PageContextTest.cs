@@ -29,7 +29,7 @@ namespace Pagination.Tests {
         [TestCase(2)]
         [TestCase(10)]
         [TestCase(11)]
-        public void FindPage_FinsNthPageOfItems(int n) {
+        public void FindPage_FindsNthPageOfItems(int n) {
             Subject.DefaultRequest.PageBaseZero = n;
             var source = Enumerable
                 .Range(0, 1000)
@@ -41,6 +41,13 @@ namespace Pagination.Tests {
                 .Skip(n * Subject.Config.ItemsPerPageDefault)
                 .Take(Subject.Config.ItemsPerPageDefault);
             CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void FindPage_SetsFilterObject() {
+            var filter = new object();
+            var page = Subject.FindPage(new object[] { }.AsQueryable().OrderBy(obj => obj), filter);
+            Assert.That(page.Filter, Is.SameAs(filter));
         }
     }
 }
