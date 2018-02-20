@@ -18,7 +18,7 @@ namespace Pagination {
         public IPageSource<TItem> GetSource<TItem>(IOrderedQueryable<TItem> query) {
             return new PageSource<TItem> {
                 Config = Config,
-                Query = query,
+                ItemsSource = query,
                 Request = GetRequest()
             };
         }
@@ -27,7 +27,7 @@ namespace Pagination {
             return new PageSource<TItem, TFilter> {
                 Config = Config,
                 Filter = filter,
-                Query = query,
+                ItemsSource = query,
                 Request = GetRequest()
             };
         }

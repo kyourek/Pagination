@@ -9,7 +9,7 @@ namespace Pagination.Linking.Tests {
         public void LinkPagse_LinksBase1PagesInSuccession() {
             var page = new Page {
                 PageBaseZero = 8,
-                PageTotal = 17
+                PagesTotal = 17
             };
 
             var linker = new NumberLinker { BaseOne = true };
@@ -28,7 +28,7 @@ namespace Pagination.Linking.Tests {
         public void LinkPages_LinksBase0PagesInSuccession() {
             var page = new Page {
                 PageBaseZero = 41,
-                PageTotal = 176
+                PagesTotal = 176
             };
 
             var linker = new NumberLinker();

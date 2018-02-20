@@ -36,7 +36,7 @@
             </form>
         </div>
         <div> 
-            <p>@Model.Page.ItemsTotal items on @Model.Page.PageTotal @(Model.Page.PageTotal == 1 ? "page" : "pages")</p>
+            <p>@Model.Page.ItemsTotal items on @Model.Page.PagesTotal @(Model.Page.PagesTotal == 1 ? "page" : "pages")</p>
             <p>Current Page: @(Model.Page.PageBaseZero + 1)</p>
             <ul class="pages">
                 @foreach (var link in pageChain.Links) {

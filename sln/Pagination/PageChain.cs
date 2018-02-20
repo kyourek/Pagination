@@ -3,12 +3,12 @@
 namespace Pagination {
     public class PageChain {
         public IEnumerable<IPageLink> Links { get; }
-        public int PageTotal { get; }
+        public int PagesTotal { get; }
         public int ItemsTotal { get; }
 
-        public PageChain(int itemsTotal, int pageTotal, IEnumerable<IPageLink> links) {
+        public PageChain(int itemsTotal, int pagesTotal, IEnumerable<IPageLink> links) {
             Links = links ?? new PageLink[] { };
-            PageTotal = pageTotal;
+            PagesTotal = pagesTotal;
             ItemsTotal = itemsTotal;
         }
     }

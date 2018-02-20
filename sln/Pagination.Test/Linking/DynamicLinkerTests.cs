@@ -10,7 +10,7 @@ namespace Pagination.Linking.Tests {
             var linker = new DynamicLinker { BaseOne = true };
             var page = new Page {
                 PageBaseZero = 1,
-                PageTotal = 56
+                PagesTotal = 56
             };
 
             var linked = linker.Links(page);

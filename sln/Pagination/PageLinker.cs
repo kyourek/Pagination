@@ -9,7 +9,7 @@ namespace Pagination {
         public PageChain Chain(IPage page) {
             return new PageChain(
                 itemsTotal: page.ItemsTotal, 
-                pageTotal: page.PageTotal, 
+                pagesTotal: page.PagesTotal, 
                 links: Links(page));
         }
 

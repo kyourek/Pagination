@@ -11,9 +11,9 @@ namespace Pagination.Linking {
 
             var baseOne = BaseOne;
             var requestedPage = page.PageBaseZero;
-            var totalPageCount = page.PageTotal;
+            var totalPageCount = page.PagesTotal;
             return Enumerable
-                .Range(0, page.PageTotal)
+                .Range(0, page.PagesTotal)
                 .Select(i => new PageLink(
                     page: page,
                     linkPageBaseZero: i,

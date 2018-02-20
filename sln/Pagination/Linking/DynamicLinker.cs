@@ -33,9 +33,9 @@ namespace Pagination.Linking {
         public bool BaseOne { get; set; }
 
         public override IEnumerable<IPageLink> Links(IPage page) {
-            if (page.PageTotal > 1) {
+            if (page.PagesTotal > 1) {
                 var requestedPage = page.PageBaseZero;
-                var totalPageCount = page.PageTotal;
+                var totalPageCount = page.PagesTotal;
                 var factory = new LinkFactory {
                     BaseOne = BaseOne,
                     Page = page

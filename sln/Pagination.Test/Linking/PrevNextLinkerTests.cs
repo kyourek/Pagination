@@ -14,7 +14,7 @@ namespace Pagination.Linking.Tests {
             };
 
             var req = new PageRequest { ItemsPerPage = 10, PageBaseZero = 2 };
-            var src = new PageSource<int> { Request = req, Query = Enumerable.Range(1, 50).AsQueryable().OrderBy(i => i) };
+            var src = new PageSource<int> { Request = req, ItemsSource = Enumerable.Range(1, 50).AsQueryable().OrderBy(i => i) };
             var page = src.FindPage();
             var linkedPages = linker.Links(page);
             Assert.IsNotNull(linkedPages);

@@ -29,7 +29,7 @@ namespace Pagination.Linking {
                 }
             }
 
-            var testNext = requestedPage < page.PageTotal - 1;
+            var testNext = requestedPage < page.PagesTotal - 1;
             if (forcePrevNext || testNext) {
                 yield return new PageLink(
                     page: page,

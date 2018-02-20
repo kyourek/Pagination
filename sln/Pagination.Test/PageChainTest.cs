@@ -14,9 +14,9 @@ namespace Pagination {
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(123)]
-        public void Constructor_SetsPageTotal(int value) {
+        public void Constructor_SetsPagesTotal(int value) {
             var subject = new PageChain(1000, value, null);
-            Assert.That(subject.PageTotal, Is.EqualTo(value));
+            Assert.That(subject.PagesTotal, Is.EqualTo(value));
         }
 
         [Test]

@@ -7,7 +7,7 @@ namespace Pagination {
     }
 
     public interface IPageSource<TItem> : IPageSource {
-        IOrderedQueryable<TItem> Query { get; }
+        IOrderedQueryable<TItem> ItemsSource { get; }
         IPage<TItem> FindPage();
     }
 
