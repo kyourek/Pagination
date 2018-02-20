@@ -33,11 +33,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CBE9A545-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Sample-net40", "Pagination.Sample-net40\Pagination.Sample-net40.csproj", "{CD47F72F-03EE-4C4E-91CA-D6C063D78C09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination-netstandard2.0", "Pagination-netstandard2.0\Pagination-netstandard2.0.csproj", "{21585A1D-212A-42A3-B381-F5C1E4798238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination-netstandard2.0", "Pagination-netstandard2.0\Pagination-netstandard2.0.csproj", "{21585A1D-212A-42A3-B381-F5C1E4798238}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard2.0", "netstandard2.0", "{135FAFB9-AE44-4E28-8620-3BB17DA61B26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Test-netstandard2.0", "Pagination.Test-netstandard2.0\Pagination.Test-netstandard2.0.csproj", "{5C26CD80-E857-4B93-AD2C-CE525C26FC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Test-netstandard2.0", "Pagination.Test-netstandard2.0\Pagination.Test-netstandard2.0.csproj", "{5C26CD80-E857-4B93-AD2C-CE525C26FC40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination-net45", "Pagination-net45\Pagination-net45.csproj", "{2AFEA374-0E0B-443D-AC9E-EBFF4BC673F6}"
 EndProject
@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Test-net45", "Pa
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Pagination.Test\Pagination.Test.projitems*{06862401-386f-43c5-b52f-fb189b2bb2fe}*SharedItemsImports = 4
+		Pagination\Pagination.projitems*{2afea374-0e0b-443d-ac9e-ebff4bc673f6}*SharedItemsImports = 4
 		Pagination.Web.Test\Pagination.Web.Test.projitems*{4298beae-059a-48cf-92f8-a229dc51ce6c}*SharedItemsImports = 4
 		Pagination\Pagination.projitems*{483ca936-e9dd-4e85-9192-5f0ed62a3273}*SharedItemsImports = 4
 		Pagination.Web.Mvc\Pagination.Web.Mvc.projitems*{59352b19-3803-4d78-bd56-0e995bd337a6}*SharedItemsImports = 4

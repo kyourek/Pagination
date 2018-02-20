@@ -6,9 +6,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup> 
-  <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.9.0" />
-  </ItemGroup>
+  </PropertyGroup>
   <Import Project="..\Pagination\Pagination.projitems" Label="Shared" Condition="Exists('..\Pagination\Pagination.projitems')" />
 </Project>
