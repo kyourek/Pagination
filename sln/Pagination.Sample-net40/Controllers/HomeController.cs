@@ -8,7 +8,7 @@ namespace Pagination.Sample.Controllers {
     using Web;
 
     public class HomeController : Controller {
-        public ActionResult Index(QueryModel query) {
+        public ActionResult Index(FilterModel filter) {
             var pageContext = new HttpPageContext()
                 .SetItemsPerPageDefault(20)
                 .SetItemsPerPageMaximum(50);
@@ -26,12 +26,13 @@ namespace Pagination.Sample.Controllers {
                 .Distinct()
                 .AsQueryable();
 
-            var searchText = query.SearchText;
+            var searchText = filter.SearchText;
             if (!string.IsNullOrWhiteSpace(searchText)) types = types.Where(t => t.Contains(searchText));
 
-            var page = pageContext
-                .GetSource()
-                .FindPage(types.OrderBy(t => t), query);
+            var page = new HttpPageContext()
+                .SetItemsPerPageDefault(20)
+                .SetItemsPerPageMaximum(50)
+                .FindPage(types.OrderBy(type => type), filter);
 
             return View(new IndexModel {
                 Page = page

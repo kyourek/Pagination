@@ -7,7 +7,7 @@ namespace Pagination {
         public int ItemsPerPage { get; set; }
         public int ItemsTotal { get; set; }
         public IQueryable Items { get; set; }
-        public object Query { get; set; }
+        public object Filter { get; set; }
 
         public int PageBaseOne => PageBaseZero + 1;
 
@@ -22,19 +22,19 @@ namespace Pagination {
             set => _Request = value;
         }
         IPageRequest _Request;
+    }
 
-        public class Of<TItem> : Page, IPage<TItem> {
-            public new IQueryable<TItem> Items {
-                get => (IQueryable<TItem>)base.Items;
-                set => base.Items = value;
-            }
+    class Page<TItem> : Page, IPage<TItem> {
+        public new IQueryable<TItem> Items {
+            get => (IQueryable<TItem>)base.Items;
+            set => base.Items = value;
+        }
+    }
 
-            public class From<TQuery> : Of<TItem>, IPage<TItem, TQuery> {
-                public new TQuery Query {
-                    get => (TQuery)base.Query;
-                    set => base.Query = value;
-                }
-            }
+    class Page<TItem, TFilter> : Page<TItem>, IPage<TItem, TFilter> {
+        public new TFilter Filter {
+            get => (TFilter)base.Filter;
+            set => base.Filter = value;
         }
     }
 }

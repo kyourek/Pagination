@@ -8,7 +8,7 @@ namespace Pagination {
         int ItemsPerPage { get; }
         int ItemsTotal { get; }
         IQueryable Items { get; }
-        object Query { get; }
+        object Filter { get; }
         IPageConfig Config { get; }
         IPageRequest Request { get; }
     }
@@ -17,7 +17,7 @@ namespace Pagination {
         new IQueryable<TItem> Items { get; }
     }
 
-    public interface IPage<TItem, TQuery> : IPage<TItem> {
-        new TQuery Query { get; }
+    public interface IPage<TItem, TFilter> : IPage<TItem> {
+        new TFilter Filter { get; }
     }
 }

@@ -1,17 +1,43 @@
-﻿namespace Pagination {
+﻿using System.Linq;
+
+namespace Pagination {
     public class PageContext {
+        internal PageRequest DefaultRequest {
+            get => _DefaultRequest ?? (_DefaultRequest = new PageRequest());
+            set => _DefaultRequest = value;
+        }
+        PageRequest _DefaultRequest;
+
         protected virtual IPageRequest GetRequest() {
-            return new PageRequest();
+            return DefaultRequest;
         }
 
         public IPageConfig Config => _Config;
         readonly PageConfig _Config = new PageConfig();
 
-        public PageSource GetSource() {
-            return new PageSource {
+        public IPageSource<TItem> GetSource<TItem>(IOrderedQueryable<TItem> query) {
+            return new PageSource<TItem> {
                 Config = Config,
+                Query = query,
                 Request = GetRequest()
             };
+        }
+
+        public IPageSource<TItem, TFilter> GetSource<TItem, TFilter>(IOrderedQueryable<TItem> query, TFilter filter) {
+            return new PageSource<TItem, TFilter> {
+                Config = Config,
+                Filter = filter,
+                Query = query,
+                Request = GetRequest()
+            };
+        }
+
+        public IPage<TItem> FindPage<TItem>(IOrderedQueryable<TItem> query) {
+            return GetSource(query).FindPage();
+        }
+
+        public IPage<TItem, TFilter> FindPage<TItem, TFilter>(IOrderedQueryable<TItem> query, TFilter filter) {
+            return GetSource(query, filter).FindPage();
         }
 
         public PageContext SetItemsPerPageDefault(int value) {

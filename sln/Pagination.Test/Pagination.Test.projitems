@@ -14,19 +14,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Linking\PrevNextLinkerTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageChainTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageConfigTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageSourceTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageContextTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyCompany.cs">
       <Link>Properties\AssemblyCompany.cs</Link>
-    </Compile>    
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyCopyright.cs">
       <Link>Properties\AssemblyCopyright.cs</Link>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
-    </Compile>    
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)..\ComVisible.cs">
       <Link>Properties\ComVisible.cs</Link>
-    </Compile>    
+    </Compile>
   </ItemGroup>
 </Project>

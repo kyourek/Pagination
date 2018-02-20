@@ -3,13 +3,10 @@
 using NUnit.Framework;
 
 namespace Pagination.Tests {
-    [TestFixture, TestOf(typeof(PageSource))]
-    public class PageSourceTest {
-        PageSource _Subject;
-        PageSource Subject => _Subject ?? (_Subject = new PageSource());
-
-        PageConfig PageConfig => (PageConfig)Subject.Config;
-        PageRequest PageRequest => (PageRequest)Subject.Request;
+    [TestFixture, TestOf(typeof(PageContext))]
+    public class PageContextTest {
+        PageContext _Subject;
+        PageContext Subject => _Subject ?? (_Subject = new PageContext());
 
         [TearDown]
         public void TearDown() {
@@ -33,7 +30,7 @@ namespace Pagination.Tests {
         [TestCase(10)]
         [TestCase(11)]
         public void FindPage_FinsNthPageOfItems(int n) {
-            PageRequest.PageBaseZero = n;
+            Subject.DefaultRequest.PageBaseZero = n;
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()

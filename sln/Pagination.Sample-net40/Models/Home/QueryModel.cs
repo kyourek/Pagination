@@ -1,5 +1,5 @@
 ﻿namespace Pagination.Sample.Models.Home {
-    public class QueryModel {
+    public class FilterModel {
         public string SearchText { get; set; }
     }
 }
