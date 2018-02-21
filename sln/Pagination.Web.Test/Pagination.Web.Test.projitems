@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\HttpPageContextTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\Routing\PageExtensionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyCompany.cs">
       <Link>Properties\AssemblyCompany.cs</Link>

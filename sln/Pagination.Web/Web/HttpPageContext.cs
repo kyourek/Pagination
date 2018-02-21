@@ -19,11 +19,11 @@ namespace Pagination.Web {
             return request;
         }
 
-        internal HttpContextWrapper Http {
+        internal HttpContextBase Http {
             get => _Http ?? (_Http = new HttpContextWrapper(HttpContext.Current));
             set => _Http = value;
         }
-        HttpContextWrapper _Http;
+        HttpContextBase _Http;
 
         protected override IPageRequest GetRequest() {
             var http = Http;

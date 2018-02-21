@@ -15,29 +15,29 @@ namespace Pagination {
         public IPageConfig Config => _Config;
         readonly PageConfig _Config = new PageConfig();
 
-        public IPageSource<TItem> GetSource<TItem>(IOrderedQueryable<TItem> query) {
+        public IPageSource<TItem> GetSource<TItem>(IOrderedQueryable<TItem> itemsSource) {
             return new PageSource<TItem> {
                 Config = Config,
-                ItemsSource = query,
+                ItemsSource = itemsSource,
                 Request = GetRequest()
             };
         }
 
-        public IPageSource<TItem, TFilter> GetSource<TItem, TFilter>(IOrderedQueryable<TItem> query, TFilter filter) {
+        public IPageSource<TItem, TFilter> GetSource<TItem, TFilter>(IOrderedQueryable<TItem> itemsSource, TFilter filter) {
             return new PageSource<TItem, TFilter> {
                 Config = Config,
                 Filter = filter,
-                ItemsSource = query,
+                ItemsSource = itemsSource,
                 Request = GetRequest()
             };
         }
 
-        public IPage<TItem> FindPage<TItem>(IOrderedQueryable<TItem> query) {
-            return GetSource(query).FindPage();
+        public IPage<TItem> FindPage<TItem>(IOrderedQueryable<TItem> itemsSource) {
+            return GetSource(itemsSource).FindPage();
         }
 
-        public IPage<TItem, TFilter> FindPage<TItem, TFilter>(IOrderedQueryable<TItem> query, TFilter filter) {
-            return GetSource(query, filter).FindPage();
+        public IPage<TItem, TFilter> FindPage<TItem, TFilter>(IOrderedQueryable<TItem> itemsSource, TFilter filter) {
+            return GetSource(itemsSource, filter).FindPage();
         }
 
         public PageContext SetItemsPerPageDefault(int value) {
