@@ -24,7 +24,7 @@ namespace Pagination {
             try {
                 foreach (var action in actions) {
                     action.Context = context;
-                    action.Log = s => Console.WriteLine((s ?? "").TrimEnd('\r', '\n'));
+                    action.Log = s => Console.WriteLine(s);
                     action.Stage = stage;
                     action.SolutionDirectory = solutionDirectory;
                     action.Work();

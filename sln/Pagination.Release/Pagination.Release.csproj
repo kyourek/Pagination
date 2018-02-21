@@ -51,6 +51,7 @@
     <Compile Include="ReleaseActions\Pack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReleaseActions\Push.cs" />
     <Compile Include="ReleaseActions\Tag.cs" />
     <Compile Include="ReleaseContext.cs" />
   </ItemGroup>
