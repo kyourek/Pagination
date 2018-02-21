@@ -49,6 +49,24 @@ namespace Pagination.Web {
         }
 
         [Test]
+        public void GetSource_ReturnsSourceWithNullItemsPerPage() {
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.ItemsPerPage,
+                Is.Null);
+        }
+
+        [Test]
+        public void GetSource_ReturnsSourceWithNullItemsPerPageWhenValuesAreNotIntegers() {
+            var key = "ipp";
+            Subject.SetItemsPerPageKey(key);
+            Subject.Http.Request.Form[key] = "21.1";
+            Subject.Http.Request.QueryString[key] = "23.3";
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.ItemsPerPage,
+                Is.Null);
+        }
+
+        [Test]
         public void GetSource_ReturnsSourceWithItemsPerPageSet() {
             Subject.Http.Request.QueryString["_p_ipp"] = "37";
             var pageSource = Subject.GetSource(ItemsSourceEmpty);
@@ -56,10 +74,68 @@ namespace Pagination.Web {
         }
 
         [Test]
+        public void GetSource_FindsItemsPerPageBasedOnKey() {
+            Subject.SetItemsPerPageKey("IPerPage");
+            Subject.Http.Request.QueryString["IPerPage"] = "777";
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.ItemsPerPage,
+                Is.EqualTo(777));
+        }
+
+        [Test]
+        public void GetSource_FindsItemsPerPageFromFormBeforeQueryString() {
+            var key = "ipp";
+            Subject.SetItemsPerPageKey(key);
+            Subject.Http.Request.Form[key] = "21";
+            Subject.Http.Request.QueryString[key] = "23";
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.ItemsPerPage,
+                Is.EqualTo(21));
+        }
+
+        [Test]
+        public void GetSource_ReturnsSourceWithNullPageBaseZero() {
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.PageBaseZero,
+                Is.Null);
+        }
+
+        [Test]
+        public void GetSource_ReturnsSourceWithNullPageBaseZeroWhenValuesAreNotIntegers() {
+            var key = "pbz";
+            Subject.SetPageBaseZeroKey(key);
+            Subject.Http.Request.Form[key] = "not an int";
+            Subject.Http.Request.QueryString[key] = "this neither";
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.PageBaseZero,
+                Is.Null);
+        }
+
+        [Test]
         public void GetSource_ReturnsSourceWithPageBaseZeroSet() {
             Subject.Http.Request.QueryString["_p_pbz"] = "401";
             var pageSource = Subject.GetSource(ItemsSourceEmpty);
             Assert.That(pageSource.Request.PageBaseZero, Is.EqualTo(401));
+        }
+
+        [Test]
+        public void GetSource_FindsPageBaseZeroBasedOnKey() {
+            Subject.SetPageBaseZeroKey("PBZero");
+            Subject.Http.Request.QueryString["PBZero"] = "1024";
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.PageBaseZero,
+                Is.EqualTo(1024));
+        }
+
+        [Test]
+        public void GetSource_FindsPageBaseZeroFromFormBeforeQueryString() {
+            var key = "pbz";
+            Subject.SetPageBaseZeroKey(key);
+            Subject.Http.Request.Form[key] = "14";
+            Subject.Http.Request.QueryString[key] = "12";
+            Assert.That(
+                Subject.GetSource(ItemsSourceEmpty).Request.PageBaseZero,
+                Is.EqualTo(14));
         }
         #endregion
 
