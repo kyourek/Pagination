@@ -12,14 +12,6 @@ namespace Pagination.Web.Mvc {
             return htmlHelper.ViewContext?.RouteData?.Values?["action"]?.ToString();
         }
 
-        public static MvcHtmlString PageLink(this HtmlHelper htmlHelper, IPageLink pageLink, object htmlAttributes) {
-            if (null == htmlHelper) throw new ArgumentNullException(nameof(htmlHelper));
-            if (null == pageLink) throw new ArgumentNullException(nameof(PageLink));
-            var actionName = htmlHelper.ActionName();
-            var routeValues = pageLink.RouteValues();
-            return htmlHelper.ActionLink(pageLink.LinkText, actionName, routeValues, htmlAttributes);
-        }
-
         public static MvcHtmlString PageLink(this HtmlHelper htmlHelper, IPageLink pageLink, IDictionary<string, object> htmlAttributes) {
             if (null == htmlHelper) throw new ArgumentNullException(nameof(htmlHelper));
             if (null == pageLink) throw new ArgumentNullException(nameof(pageLink));
