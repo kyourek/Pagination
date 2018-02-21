@@ -2,7 +2,7 @@
 using System.Linq;
 
 namespace Pagination {
-    using BuildActions;
+    using ReleaseActions;
 
     class Program {
         static string Arg(string[] args, string name) {
@@ -13,7 +13,7 @@ namespace Pagination {
             var debug = Arg(args, "Debug") == "yes";
             var stage = Arg(args, "Stage");
             var solutionDirectory = Arg(args, "SolutionDirectory");
-            var actions = new BuildAction[] {
+            var actions = new ReleaseAction[] {
                 new Bump(),
                 new Build(),
                 new Pack()

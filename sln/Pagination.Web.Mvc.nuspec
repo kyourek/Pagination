@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Pagination.Web.Mvc</id>
-    <version>2.0.0.33</version>
+    <version>2.0.0.35</version>
     <authors>Ken Yourek</authors>
     <description>Pagination offers easy control over paged results from IQueryable sources.</description>
     <projectUrl>https://github.com/kyourek/Pagination</projectUrl>
     <licenseUrl>https://raw.githubusercontent.com/kyourek/Pagination/master/LICENSE</licenseUrl>
     <dependencies>
-      <dependency id="Pagination" version="2.0.0.33" />
-      <dependency id="Pagination.Web" version="2.0.0.33" />
+      <dependency id="Pagination" version="2.0.0.35" />
+      <dependency id="Pagination.Web" version="2.0.0.35" />
       <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
     </dependencies>
     <frameworkAssemblies>

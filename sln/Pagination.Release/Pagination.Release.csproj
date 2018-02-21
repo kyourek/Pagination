@@ -45,10 +45,10 @@
     <Compile Include="..\ComVisible.cs">
       <Link>Properties\ComVisible.cs</Link>
     </Compile>
-    <Compile Include="BuildAction.cs" />
-    <Compile Include="BuildActions\Build.cs" />
-    <Compile Include="BuildActions\Bump.cs" />
-    <Compile Include="BuildActions\Pack.cs" />
+    <Compile Include="ReleaseAction.cs" />
+    <Compile Include="ReleaseActions\Build.cs" />
+    <Compile Include="ReleaseActions\Bump.cs" />
+    <Compile Include="ReleaseActions\Pack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

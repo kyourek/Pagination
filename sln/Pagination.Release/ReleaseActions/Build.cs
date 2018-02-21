@@ -1,5 +1,5 @@
-﻿namespace Pagination.BuildActions {
-    class Build : BuildAction {
+﻿namespace Pagination.ReleaseActions {
+    class Build : ReleaseAction {
         public override void Work() {
             var solutionPath = $"\"{SolutionFilePath}\"";
             Process("nuget", "restore", solutionPath);

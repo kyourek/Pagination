@@ -3,8 +3,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-namespace Pagination.BuildActions {
-    class Bump : BuildAction {
+namespace Pagination.ReleaseActions {
+    class Bump : ReleaseAction {
         public override void Work() {
             var version = "";
             var assemblyFiles = new[] { "AssemblyVersion" };

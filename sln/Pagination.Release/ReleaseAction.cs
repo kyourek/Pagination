@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 
 namespace Pagination {
-    abstract class BuildAction {
+    abstract class ReleaseAction {
         protected void Process(string fileName, params string[] arguments) {
             var args = string.Join(" ", arguments);
             Log(fileName + " " + args);
