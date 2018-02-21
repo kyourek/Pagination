@@ -13,14 +13,17 @@ namespace Pagination {
             var debug = Arg(args, "Debug") == "yes";
             var stage = Arg(args, "Stage");
             var solutionDirectory = Arg(args, "SolutionDirectory");
+            var context = new ReleaseContext();
             var actions = new ReleaseAction[] {
                 new Bump(),
                 new Build(),
-                new Pack()
+                new Pack(),
+                new Tag()
             };
 
             try {
                 foreach (var action in actions) {
+                    action.Context = context;
                     action.Log = s => Console.WriteLine(s);
                     action.Stage = stage;
                     action.SolutionDirectory = solutionDirectory;

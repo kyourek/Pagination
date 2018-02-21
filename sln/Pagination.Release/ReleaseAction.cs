@@ -48,6 +48,12 @@ namespace Pagination {
         public string Stage { get; set; }
         public Action<string> Log { get; set; }
 
+        public ReleaseContext Context {
+            get => _Context ?? (_Context = new ReleaseContext());
+            set => _Context = value;
+        }
+        ReleaseContext _Context;
+
         public abstract void Work();
     }
 }

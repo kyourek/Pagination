@@ -29,20 +29,24 @@ namespace Pagination.ReleaseActions {
                 version = vers;
             }
 
+            Context.Version = version;
+            Context.VersionStage = version + (string.IsNullOrWhiteSpace(Stage) 
+                ? "" 
+                : ("-" + Stage));
+
             var nuspecFiles = Directory.GetFiles(SolutionDirectory, "*.nuspec", SearchOption.TopDirectoryOnly);
             foreach (var nuspecFile in nuspecFiles) {
                 Log("Bumping " + nuspecFile + "...");
                 Log("Path: " + nuspecFile);
 
-                var stag = version + (Stage == null ? "" : ("-" + Stage));
                 var xdoc = XDocument.Load(nuspecFile);
                 var xmln = "http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd";
                 var vers = xdoc.Descendants(XName.Get("version", xmln)).Single();
-                vers.Value = stag;
+                vers.Value = Context.VersionStage;
 
                 var deps = xdoc.Descendants(XName.Get("dependency", xmln)).Where(dep => dep.Attribute("id").Value.StartsWith("Pagination"));
                 foreach (var dep in deps) {
-                    dep.Attribute("version").Value = stag;
+                    dep.Attribute("version").Value = Context.VersionStage;
                 }
 
                 xdoc.Save(nuspecFile);
