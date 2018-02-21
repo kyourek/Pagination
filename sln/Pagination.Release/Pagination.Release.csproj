@@ -7,7 +7,7 @@
     <ProjectGuid>{FC5470D7-83E1-4960-BB8E-C15D9A66370B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Pagination</RootNamespace>
-    <AssemblyName>Pagination.Build</AssemblyName>
+    <AssemblyName>Pagination.Release</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -59,6 +59,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
-    <Copy SourceFiles="$(ProjectDir)bin\Pagination.Build.exe" DestinationFiles="$(SolutionDir)pagination-build.exe.latest" />
+    <Copy SourceFiles="$(ProjectDir)bin\Pagination.Release.exe" DestinationFiles="$(SolutionDir)pagination-release.exe.latest" />
   </Target>
 </Project>
