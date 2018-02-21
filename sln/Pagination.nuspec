@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Pagination</id>
-    <version>2.0.0-alpha3</version>
+    <version>2.0.0.9-alpha</version>
     <authors>Ken Yourek</authors>
     <description>Pagination offers easy control over paged results from IQueryable sources.</description>
     <projectUrl>https://github.com/kyourek/Pagination</projectUrl>
     <licenseUrl>https://raw.githubusercontent.com/kyourek/Pagination/master/LICENSE</licenseUrl>
-    <dependencies>
-    </dependencies>
-    <frameworkAssemblies>
-    </frameworkAssemblies>
+    <dependencies></dependencies>
+    <frameworkAssemblies></frameworkAssemblies>
   </metadata>
   <files>
     <file src="Pagination-net40/bin/Pagination.dll" target="lib/net40" />
