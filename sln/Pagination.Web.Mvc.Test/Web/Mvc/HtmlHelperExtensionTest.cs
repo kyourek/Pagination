@@ -1,13 +1,12 @@
 ﻿using System.Collections.Specialized;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 using NUnit.Framework;
 
 namespace Pagination.Web.Mvc {
-    [TestFixture, TestOf(typeof(UrlHelperExtension))]
-    public class UrlHelperExtensionTest {
+    [TestFixture, TestOf(typeof(HtmlHelperExtension))]
+    public class HtmlHelperExtensionTest {
         class HttpRequest : HttpRequestBase {
             NameValueCollection _ServerVariables;
             public override string ApplicationPath => "/";
@@ -27,14 +26,23 @@ namespace Pagination.Web.Mvc {
             public override HttpResponseBase Response => _Response ?? (_Response = new HttpResponse());
         }
 
-        UrlHelper Subject {
-            get => _Subject ?? (_Subject = new UrlHelper(new RequestContext(new HttpContext(), new RouteData())));
+        class ViewDataContainer : IViewDataContainer {
+            ViewDataDictionary _ViewData;
+            public ViewDataDictionary ViewData {
+                get => _ViewData ?? (_ViewData = new ViewDataDictionary());
+                set => _ViewData = value;
+            }
+        }
+
+        HtmlHelper Subject {
+            get => _Subject ?? (_Subject = new HtmlHelper(new ViewContext(), new ViewDataContainer()));
             set => _Subject = value;
         }
-        UrlHelper _Subject;
+        HtmlHelper _Subject;
 
         [SetUp]
         public void SetUp() {
+            Subject.ViewContext.HttpContext = new HttpContext();
             Subject.RouteCollection.Clear();
         }
 
@@ -44,12 +52,12 @@ namespace Pagination.Web.Mvc {
         }
 
         [Test]
-        public void PageLink_CreatesUrlForPage() {
+        public void PageLink_CreatesLinkForPage() {
             Subject.RouteCollection.MapRoute("Test", "homepage");
             var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
-            var pageLink = new PageLink(page, 2, "2");
-            var actual = UrlHelperExtension.PageLink(Subject, pageLink);
-            var expected = "/homepage?Color=blue&_p_ipp=54&_p_pbz=2";
+            var pageLink = new PageLink(page, 2, "page 2");
+            var actual = HtmlHelperExtension.PageLink(Subject, pageLink).ToString();
+            var expected = MvcHtmlString.Create("<a href=\"/homepage?Color=blue&amp;_p_ipp=54&amp;_p_pbz=2\">page 2</a>").ToString();
             Assert.That(actual, Is.EqualTo(expected));
         }
     }
