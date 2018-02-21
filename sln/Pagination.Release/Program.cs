@@ -18,7 +18,8 @@ namespace Pagination {
                 new Bump(),
                 new Build(),
                 new Pack(),
-                new Tag()
+                new Tag(),
+                new Push()
             };
 
             try {
