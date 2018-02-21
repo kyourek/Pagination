@@ -58,7 +58,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Test-net45", "Pa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tool", "tool", "{139FFCCD-2B73-436E-9DD7-F79885A5245D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Build", "Pagination.Release\Pagination.Build.csproj", "{FC5470D7-83E1-4960-BB8E-C15D9A66370B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Release", "Pagination.Release\Pagination.Release.csproj", "{FC5470D7-83E1-4960-BB8E-C15D9A66370B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
