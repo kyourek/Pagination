@@ -18,7 +18,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="Pagination.Web.Mvc-net40/bin/Release/Pagination.Web.Mvc.dll" target="lib/net40"/>
-    <file src="Pagination.Web.Mvc-net45/bin/Release/Pagination.Web.Mvc.dll" target="lib/net45"/>
+    <file src="Pagination.Web.Mvc-net40/bin/Pagination.Web.Mvc.dll" target="lib/net40"/>
+    <file src="Pagination.Web.Mvc-net45/bin/Pagination.Web.Mvc.dll" target="lib/net45"/>
   </files>
 </package>
