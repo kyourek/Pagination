@@ -1,86 +1,134 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pagination {
-    using Linking;
-
-    public abstract class PageLinker {
-        public abstract IEnumerable<IPageLink> Links(IPage page);
-
-        public PageChain Chain(IPage page) {
-            return new PageChain(
-                itemsTotal: page.ItemsTotal, 
-                pagesTotal: page.PagesTotal, 
-                links: Links(page));
-        }
-
-        public static PageLinker Create(bool baseOne, string prevText, string nextText, bool forcePrevNext) {
-            var baseLinker = new NumberLinker { BaseOne = baseOne };
-            if (string.IsNullOrEmpty(prevText) && string.IsNullOrEmpty(nextText)) {
-                return baseLinker;
+    class PageLinker : IPageLinker {
+        IEnumerable<IPageLink> PrevLinks(string text, bool force) {
+            var pageBaseZero = Page.PageBaseZero;
+            var hasPrev = pageBaseZero > 0;
+            if (hasPrev || force) {
+                yield return new PageLink(
+                    page: Page,
+                    linkPageBaseZero: hasPrev ? pageBaseZero - 1 : pageBaseZero,
+                    linkText: text);
             }
-            return new PrevNextLinker {
-                BaseLinker = baseLinker,
-                PrevText = prevText,
-                NextText = nextText,
-                ForcePrevNext = forcePrevNext
-            };
         }
 
-        public static PageLinker Create(bool baseOne, string prevText, string nextText) {
-            return Create(baseOne, prevText, nextText, true);
-        }
-
-        public static PageLinker Create(string prevText, string nextText) {
-            return Create(true, prevText, nextText);
-        }
-
-        public static PageLinker Create(bool baseOne) {
-            return Create(baseOne, null, null, false);
-        }
-
-        public static PageLinker Create() {
-            return Create(true);
-        }
-
-        public static PageLinker CreateDynamic(bool baseOne, string prevText, string nextText, bool forcePrevNext) {
-            var baseLinker = new DynamicLinker { BaseOne = baseOne };
-            if (string.IsNullOrEmpty(prevText) && string.IsNullOrEmpty(nextText)) {
-                return baseLinker;
+        IEnumerable<IPageLink> NextLinks(string text, bool force) {
+            var pageBaseZero = Page.PageBaseZero;
+            var hasNext = pageBaseZero < Page.PagesTotal - 1;
+            if (hasNext || force) {
+                yield return new PageLink(
+                    page: Page,
+                    linkPageBaseZero: hasNext ? pageBaseZero + 1 : pageBaseZero,
+                    linkText: text);
             }
-            return new PrevNextLinker {
-                BaseLinker = baseLinker,
-                PrevText = prevText,
-                NextText = nextText,
-                ForcePrevNext = forcePrevNext
-            };
         }
 
-        public static PageLinker CreateDynamic(bool baseOne, string prevText, string nextText) {
-            return CreateDynamic(baseOne, prevText, nextText, true);
+        IEnumerable<IPageLink> NumberedLinks(bool baseOne) {
+            return Enumerable
+                .Range(0, Page.PagesTotal)
+                .Select(pageBaseZero => new PageLink(
+                    page: Page,
+                    linkPageBaseZero: pageBaseZero,
+                    linkText: (pageBaseZero + (baseOne ? 1 : 0)).ToString()));
         }
 
-        public static PageLinker CreateDynamic(string prevText, string nextText) {
-            return CreateDynamic(true, prevText, nextText);
+        public IPage Page { get; }
+        public IEnumerable<IPageLink> Links { get; }
+
+        IPageChain _Chain;
+        public IPageChain Chain => _Chain ?? (_Chain = new PageChain(Page, Links));
+
+        public PageLinker(IPage page, IEnumerable<IPageLink> links = null) {
+            Page = page ?? throw new ArgumentNullException(nameof(page));
+            Links = links ?? new IPageLink[] { };
         }
 
-        public static PageLinker CreateDynamic(bool baseOne) {
-            return CreateDynamic(baseOne, null, null, false);
+        public IPageLinker Prev(string text, bool force) {
+            return new PageLinker(Page, Links.Concat(PrevLinks(text ?? "<", force)));
         }
 
-        public static PageLinker CreateDynamic() {
-            return CreateDynamic(true);
+        public IPageLinker Next(string text, bool force) {
+            return new PageLinker(Page, Links.Concat(NextLinks(text ?? ">", force)));
         }
 
-        public static PageLinker CreatePrevNext(string prevText, string nextText, bool forcePrevNext) {
-            return new PrevNextLinker {
-                PrevText = prevText,
-                NextText = nextText,
-                ForcePrevNext = forcePrevNext
-            };
+        public IPageLinker Numbers(bool baseOne) {
+            return new PageLinker(Page, Links.Concat(NumberedLinks(baseOne)));
         }
 
-        public static PageLinker CreatePrevNext(string prevText, string nextText) {
-            return CreatePrevNext(prevText, nextText, true);
+        public IPageLinker Dynamic(bool baseOne) {
+            return new PageLinker(Page, Links.Concat(new DynamicLinker { BaseOne = baseOne }.Links(Page)));
+        }
+
+        class DynamicLinker {
+            class LinkFactory {
+                public IPage Page { get; set; }
+                public bool BaseOne { get; set; }
+
+                public PageLink CreateLink(int pageBaseZero, string text) {
+                    return new PageLink(
+                        page: Page,
+                        linkPageBaseZero: pageBaseZero,
+                        linkText: text);
+                }
+
+                public PageLink CreateLink(int pageBaseZero) {
+                    return CreateLink(
+                        pageBaseZero: pageBaseZero,
+                        text: BaseOne
+                            ? (pageBaseZero + 1).ToString()
+                            : pageBaseZero.ToString());
+                }
+
+                public PageLink CreateRange(int lowerPageBaseZero, int upperPageBaseZero) {
+                    return new PageLink(
+                        page: Page,
+                        linkText: "...",
+                        lowerPageBaseZero: lowerPageBaseZero,
+                        upperPageBaseZero: upperPageBaseZero);
+                }
+            }
+
+            public bool BaseOne { get; set; }
+
+            public IEnumerable<IPageLink> Links(IPage page) {
+                if (page.PagesTotal > 1) {
+                    var requestedPage = page.PageBaseZero;
+                    var totalPageCount = page.PagesTotal;
+                    var factory = new LinkFactory {
+                        BaseOne = BaseOne,
+                        Page = page
+                    };
+
+                    yield return factory.CreateLink(0);
+
+                    if (requestedPage > 1) {
+                        var test = requestedPage == totalPageCount - 1 && totalPageCount > 3;
+                        yield return factory.CreateRange(1, test ? requestedPage - 3 : requestedPage - 2);
+                        if (test) {
+                            yield return factory.CreateLink(requestedPage - 2);
+                        }
+                        yield return factory.CreateLink(requestedPage - 1);
+                    }
+
+                    if (requestedPage != 0 && requestedPage != totalPageCount - 1) {
+                        yield return factory.CreateLink(requestedPage);
+                    }
+
+                    if (requestedPage < totalPageCount - 2) {
+                        var test = requestedPage == 0 && totalPageCount > 3;
+                        yield return factory.CreateLink(requestedPage + 1);
+                        if (test) {
+                            yield return factory.CreateLink(requestedPage + 2);
+                        }
+                        yield return factory.CreateRange(test ? requestedPage + 3 : requestedPage + 2, totalPageCount - 2);
+                    }
+
+                    yield return factory.CreateLink(totalPageCount - 1);
+                }
+            }
         }
     }
 }

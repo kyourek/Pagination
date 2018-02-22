@@ -18,22 +18,22 @@ namespace Pagination {
 
     class PageSource<TItem> : PageSource, IPageSource<TItem> {
         protected IPage<TItem, TFilter> FindPage<TFilter>(TFilter filter) {
-            var def = default(int);
             var src = ItemsSource;
             var req = Request;
             var cnf = Config;
 
-            def = cnf.ItemsPerPageDefault;
+            var def = cnf.ItemsPerPageDefault;
+            var max = cnf.ItemsPerPageMaximum;
             var itemsPerPage = req.ItemsPerPage ?? def;
             if (itemsPerPage < 1) itemsPerPage = def;
-            if (itemsPerPage > cnf.ItemsPerPageMaximum) itemsPerPage = def;
+            if (itemsPerPage > max) itemsPerPage = max;
 
             var itemsTotal = src.Count();
             var pagesTotal = (int)Math.Ceiling((double)itemsTotal / itemsPerPage);
 
-            def = 0;
-            var pageBaseZero = req.PageBaseZero ?? def;
-            if (pageBaseZero < 0) pageBaseZero = def;
+            var min = 0;
+            var pageBaseZero = req.PageBaseZero ?? min;
+            if (pageBaseZero < 0) pageBaseZero = min;
 
             var items = src
                 .Skip(itemsPerPage * pageBaseZero)

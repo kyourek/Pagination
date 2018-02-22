@@ -9,12 +9,9 @@
     <Import_RootNamespace>Pagination.Test</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Linking\DynamicLinkerTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Linking\NumberLinkerTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Linking\PrevNextLinkerTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageChainTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageConfigTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageContextTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageLinkerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyCompany.cs">
       <Link>Properties\AssemblyCompany.cs</Link>

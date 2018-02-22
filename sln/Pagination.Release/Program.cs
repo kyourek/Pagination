@@ -10,32 +10,38 @@ namespace Pagination {
         }
 
         static void Main(string[] args) {
-            var debug = Arg(args, "Debug") == "yes";
-            var stage = Arg(args, "Stage");
-            var solutionDirectory = Arg(args, "SolutionDirectory");
-            var context = new ReleaseContext();
-            var actions = new ReleaseAction[] {
-                new Bump(),
-                new Build(),
-                new Pack(),
-                new Tag(),
-                new Push()
-            };
-
             try {
+                var stage = Arg(args, "Stage");
+                var release = Arg(args, "Release") == "yes";
+                if (release == false && string.IsNullOrWhiteSpace(stage)) {
+                    throw new InvalidOperationException("Must either stage or release");
+                }
+
+                var solutionDirectory = Arg(args, "SolutionDirectory");
+                var context = new ReleaseContext();
+                var actions = new ReleaseAction[] {
+                    new Bump(),
+                    new Build(),
+                    new Pack(),
+                    new Tag(),
+                    new Push()
+                };
+
                 foreach (var action in actions) {
-                    action.Context = context;
-                    action.Log = s => Console.WriteLine(s);
-                    action.Stage = stage;
-                    action.SolutionDirectory = solutionDirectory;
-                    action.Work();
+                    if (Arg(args, action.GetType().Name) != "no") {
+                        action.Context = context;
+                        action.Log = s => Console.WriteLine(s);
+                        action.Stage = stage;
+                        action.SolutionDirectory = solutionDirectory;
+                        action.Work();
+                    }
                 }
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
             }
 
-            if (debug) {
+            if (Arg(args, "Debug") == "yes") {
                 Console.ReadLine();
             }
         }

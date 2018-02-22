@@ -16,6 +16,8 @@ namespace Pagination {
             set => _Config = value;
         }
         IPageConfig _Config;
+
+        public IPageLinker Linker() => new PageLinker(this);
     }
 
     class Page<TItem> : Page, IPage<TItem> {

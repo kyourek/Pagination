@@ -10,6 +10,7 @@ namespace Pagination {
         IQueryable Items { get; }
         object Filter { get; }
         IPageConfig Config { get; }
+        IPageLinker Linker();
     }
 
     public interface IPage<TItem> : IPage {

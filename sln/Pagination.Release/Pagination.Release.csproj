@@ -54,6 +54,7 @@
     <Compile Include="ReleaseActions\Push.cs" />
     <Compile Include="ReleaseActions\Tag.cs" />
     <Compile Include="ReleaseContext.cs" />
+    <Compile Include="ReleaseVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

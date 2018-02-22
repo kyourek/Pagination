@@ -6,9 +6,7 @@ using System.Xml.Linq;
 namespace Pagination.ReleaseActions {
     class Bump : ReleaseAction {
         public override void Work() {
-            var version = "";
-            var assemblyFiles = new[] { "AssemblyVersion" };
-            foreach (var assemblyFile in assemblyFiles) {
+            foreach (var assemblyFile in new[] { "AssemblyVersion" }) {
                 Log("Bumping " + assemblyFile + "...");
 
                 var path = Path.Combine(SolutionDirectory, assemblyFile + ".cs");
@@ -18,21 +16,13 @@ namespace Pagination.ReleaseActions {
                 var regex = new Regex(@"\d+(\.\d+)*");
                 var match = regex.Match(text);
 
-                var vers = match.Value;
-                var versParts = vers.Split('.').Select(versPart => int.Parse(versPart)).ToArray();
-                versParts[3] += 1;
+                var relVersion = ReleaseVersion.ParseFullVersion(match.Value, Stage);
+                var nextVersion = relVersion.NextRevision();
 
-                vers = string.Join(".", versParts);
-                text = text.Replace(match.Value, vers);
-                File.WriteAllText(path, text);
+                File.WriteAllText(path, text.Replace(match.Value, nextVersion.FullVersion));
 
-                version = vers;
+                Context.Version = nextVersion;
             }
-
-            Context.Version = version;
-            Context.VersionStage = version + (string.IsNullOrWhiteSpace(Stage) 
-                ? "" 
-                : ("-" + Stage));
 
             var nuspecFiles = Directory.GetFiles(SolutionDirectory, "*.nuspec", SearchOption.TopDirectoryOnly);
             foreach (var nuspecFile in nuspecFiles) {
@@ -42,11 +32,11 @@ namespace Pagination.ReleaseActions {
                 var xdoc = XDocument.Load(nuspecFile);
                 var xmln = "http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd";
                 var vers = xdoc.Descendants(XName.Get("version", xmln)).Single();
-                vers.Value = Context.VersionStage;
+                vers.Value = Context.Version.StagedVersion;
 
                 var deps = xdoc.Descendants(XName.Get("dependency", xmln)).Where(dep => dep.Attribute("id").Value.StartsWith("Pagination"));
                 foreach (var dep in deps) {
-                    dep.Attribute("version").Value = Context.VersionStage;
+                    dep.Attribute("version").Value = Context.Version.StagedVersion;
                 }
 
                 xdoc.Save(nuspecFile);

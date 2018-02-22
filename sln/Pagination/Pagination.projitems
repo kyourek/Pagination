@@ -10,18 +10,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)IPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPageChain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPageConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPageLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPageLinker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPageRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPageSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Linking\DynamicLinker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Linking\NumberLinker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Linking\PrevNextLinker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Page.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageChain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageLinker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageRequest.cs" />
