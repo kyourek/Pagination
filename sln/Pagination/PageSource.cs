@@ -9,11 +9,23 @@ namespace Pagination {
         }
         IPageConfig _Config;
 
-        public IPageRequest Request {
+        public PageRequest Request {
             get => _Request ?? (_Request = new PageRequest());
             set => _Request = value;
         }
-        IPageRequest _Request;
+        PageRequest _Request;
+
+        public IPageSource SetItemsPerPage(int value) {
+            Request.ItemsPerPage = value;
+            return this;
+        }
+
+        public IPageSource SetPageBaseZero(int value) {
+            Request.PageBaseZero = value;
+            return this;
+        }
+
+        IPageRequest IPageSource.Request => Request;
     }
 
     class PageSource<TItem> : PageSource, IPageSource<TItem> {

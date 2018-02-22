@@ -8,8 +8,11 @@ namespace Pagination {
         }
         PageRequest _DefaultRequest;
 
-        protected virtual IPageRequest GetRequest() {
-            return DefaultRequest;
+        internal virtual PageRequest GetRequest() {
+            return new PageRequest {
+                ItemsPerPage = DefaultRequest.ItemsPerPage,
+                PageBaseZero = DefaultRequest.PageBaseZero
+            };
         }
 
         public IPageConfig Config => _Config;

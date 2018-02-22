@@ -25,7 +25,7 @@ namespace Pagination.Web {
         }
         HttpContextBase _Http;
 
-        protected override IPageRequest GetRequest() {
+        internal override PageRequest GetRequest() {
             var http = Http;
             var request = http?.Request;
             return 
