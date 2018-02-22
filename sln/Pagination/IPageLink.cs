@@ -7,5 +7,8 @@
         int LowerPageBaseZero { get; }
         IPage Page { get; }
         int UpperPageBaseZero { get; }
+        int LinkPageBaseOne { get; }
+        int LowerPageBaseOne { get; }
+        int UpperPageBaseOne { get; }
     }
 }

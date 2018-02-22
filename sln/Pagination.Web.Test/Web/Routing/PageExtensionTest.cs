@@ -44,7 +44,7 @@ namespace Pagination.Web.Routing {
         public void RouteValues_ThrowsIfPageIsNull() {
             Assert.That(() =>
                 PageExtension.RouteValues(null),
-                Throws.ArgumentNullException);
+                Throws.ArgumentNullException.With.Property("ParamName").EqualTo("page"));
         }
     }
 }

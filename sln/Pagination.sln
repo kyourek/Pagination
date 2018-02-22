@@ -3,6 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{35455002-F297-43D9-9238-A45D969574E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CBE9A545-BABE-47D5-849D-4837BE55CDC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard2.0", "netstandard2.0", "{135FAFB9-AE44-4E28-8620-3BB17DA61B26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{A2817AC6-1623-440B-867C-E5139838B66F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{95F9BE95-E62E-4DCE-A6BF-6F49FB46DDB6}"
+	ProjectSection(SolutionItems) = preProject
+		Pagination.nuspec = Pagination.nuspec
+		Pagination.Web.Mvc.nuspec = Pagination.Web.Mvc.nuspec
+		Pagination.Web.nuspec = Pagination.Web.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tool", "tool", "{139FFCCD-2B73-436E-9DD7-F79885A5245D}"
+EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Pagination", "Pagination\Pagination.shproj", "{D8F50141-9ABA-417B-97AF-470A34CBEEDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination-net40", "Pagination-net40\Pagination-net40.csproj", "{483CA936-E9DD-4E85-9192-5F0ED62A3273}"
@@ -19,8 +36,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Test-net40",
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Pagination.Web.Test", "Pagination.Web.Test\Pagination.Web.Test.shproj", "{97257B60-477C-4FA1-8D53-E2F44D670D3C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{35455002-F297-43D9-9238-A45D969574E0}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Pagination.Web.Mvc", "Pagination.Web.Mvc\Pagination.Web.Mvc.shproj", "{A189574B-1BDA-4763-80B0-7CE0A1781BCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Mvc-net40", "Pagination.Web.Mvc-net40\Pagination.Web.Mvc-net40.csproj", "{59352B19-3803-4D78-BD56-0E995BD337A6}"
@@ -29,34 +44,19 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Pagination.Web.Mvc.Test", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Mvc.Test-net40", "Pagination.Web.Mvc.Test-net40\Pagination.Web.Mvc.Test-net40.csproj", "{D775769A-87C1-4C1D-90E1-3EF3EC714D71}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CBE9A545-BABE-47D5-849D-4837BE55CDC9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Sample-net40", "Pagination.Sample-net40\Pagination.Sample-net40.csproj", "{CD47F72F-03EE-4C4E-91CA-D6C063D78C09}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination-netstandard2.0", "Pagination-netstandard2.0\Pagination-netstandard2.0.csproj", "{21585A1D-212A-42A3-B381-F5C1E4798238}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard2.0", "netstandard2.0", "{135FAFB9-AE44-4E28-8620-3BB17DA61B26}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Test-netstandard2.0", "Pagination.Test-netstandard2.0\Pagination.Test-netstandard2.0.csproj", "{5C26CD80-E857-4B93-AD2C-CE525C26FC40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination-net45", "Pagination-net45\Pagination-net45.csproj", "{2AFEA374-0E0B-443D-AC9E-EBFF4BC673F6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{A2817AC6-1623-440B-867C-E5139838B66F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{95F9BE95-E62E-4DCE-A6BF-6F49FB46DDB6}"
-	ProjectSection(SolutionItems) = preProject
-		Pagination.nuspec = Pagination.nuspec
-		Pagination.Web.Mvc.nuspec = Pagination.Web.Mvc.nuspec
-		Pagination.Web.nuspec = Pagination.Web.nuspec
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web-net45", "Pagination.Web-net45\Pagination.Web-net45.csproj", "{3CB83842-90EF-44AC-8F99-BB64D05A80C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Mvc-net45", "Pagination.Web.Mvc-net45\Pagination.Web.Mvc-net45.csproj", "{833F4CA1-8E0C-412A-AB60-D47DFEB43A4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Test-net45", "Pagination.Test-net45\Pagination.Test-net45.csproj", "{06862401-386F-43C5-B52F-FB189B2BB2FE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tool", "tool", "{139FFCCD-2B73-436E-9DD7-F79885A5245D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Release", "Pagination.Release\Pagination.Release.csproj", "{FC5470D7-83E1-4960-BB8E-C15D9A66370B}"
 EndProject

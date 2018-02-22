@@ -71,5 +71,27 @@ namespace Pagination.Web.Mvc {
             var expected = MvcHtmlString.Create("<a class=\"biglink\" href=\"/homepage?Color=blue&amp;_p_ipp=54&amp;_p_pbz=2\">page 2</a>").ToString();
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void PageLink_ThrowsIfPageLinkIsNull() {
+            Subject.RouteCollection.MapRoute("Test", "homepage");
+            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var pageLink = new PageLink(page, 2, "page 2");
+            Assert.That(() =>
+                HtmlHelperExtension.PageLink(Subject, null),
+                Throws.ArgumentNullException.With.Property("ParamName").EqualTo("pageLink")
+            );
+        }
+
+        [Test]
+        public void PageLink_ThrowsIfHtmlHelperIsNull() {
+            Subject.RouteCollection.MapRoute("Test", "homepage");
+            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var pageLink = new PageLink(page, 2, "page 2");
+            Assert.That(() =>
+                HtmlHelperExtension.PageLink(null, pageLink),
+                Throws.ArgumentNullException.With.Property("ParamName").EqualTo("htmlHelper")
+            );
+        }
     }
 }

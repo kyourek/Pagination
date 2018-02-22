@@ -9,6 +9,9 @@ namespace Pagination {
         public bool IsRequestedPage { get; }
         public string LinkText { get; }
         public IPage Page { get; }
+        public int LinkPageBaseOne => LinkPageBaseZero + 1;
+        public int LowerPageBaseOne => LowerPageBaseZero + 1;
+        public int UpperPageBaseOne => UpperPageBaseZero + 1;
 
         public PageLink(IPage page, int linkPageBaseZero, string linkText) {
             Page = page ?? throw new ArgumentNullException(nameof(page));

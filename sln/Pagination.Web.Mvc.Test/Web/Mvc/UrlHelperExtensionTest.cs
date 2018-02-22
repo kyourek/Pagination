@@ -52,5 +52,27 @@ namespace Pagination.Web.Mvc {
             var expected = "/homepage?Color=blue&_p_ipp=54&_p_pbz=2";
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void PageLink_ThrowsIfPageLinkIsNull() {
+            Subject.RouteCollection.MapRoute("Test", "homepage");
+            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var pageLink = new PageLink(page, 2, "2");
+            Assert.That(() =>
+                UrlHelperExtension.PageLink(Subject, null),
+                Throws.ArgumentNullException.With.Property("ParamName").EqualTo("pageLink")
+            );
+        }
+
+        [Test]
+        public void PageLink_ThrowsIfUrlHelperIsNull() {
+            Subject.RouteCollection.MapRoute("Test", "homepage");
+            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var pageLink = new PageLink(page, 2, "2");
+            Assert.That(() =>
+                UrlHelperExtension.PageLink(null, pageLink),
+                Throws.ArgumentNullException.With.Property("ParamName").EqualTo("urlHelper")
+            );
+        }
     }
 }
