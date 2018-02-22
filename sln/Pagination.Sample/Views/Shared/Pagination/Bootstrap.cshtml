@@ -1,0 +1,18 @@
+﻿@using Pagination
+@using Pagination.Web.Mvc
+@model IEnumerable<IPageLink>
+<ul class="pagination">
+    @foreach (var item in Model) {
+        if (item.IsPageRange) {
+            <li class="disabled"><span>...</span></li>
+        }
+        else {
+            if (item.IsRequestedPage) {
+                <li class="active"><span>@item.LinkText</span></li>
+            }
+            else {
+                <li>@Html.PageLink(item)</li>
+            }
+        }
+    }
+</ul>

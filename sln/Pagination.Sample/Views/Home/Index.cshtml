@@ -1,0 +1,68 @@
+﻿@using Pagination
+@using Pagination.Web.Mvc
+@model Pagination.Sample.Models.Home.IndexModel
+@{
+    var pageChain = Model.Page.Linker().Prev().Next().Dynamic();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pagination</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <style type="text/css">
+        ul.pages {
+            list-style-type: none;
+        }
+        ul.pages li {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="#" method="get">
+            <div>
+                <label for="SearchText">Search Text</label>
+                <input type="text" name="SearchText" value="@Model.Page.Filter.SearchText" />
+            </div>
+            <div>
+                <label for="ItemsPerPage">ItemsPerPage</label>
+                <input type="text" name="@Model.Page.Config.ItemsPerPageKey" value="@Model.Page.ItemsPerPage" />
+            </div>
+            <div>
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <p>@Model.Page.ItemsTotal items on @Model.Page.PagesTotal @(Model.Page.PagesTotal == 1 ? "page" : "pages")</p>
+        <p>Current Page: @(Model.Page.PageBaseOne)</p>
+        <ul class="pages">
+            @foreach (var link in pageChain.Links) {
+                if (link.IsPageRange) {
+                    <li>...</li>
+                }
+                else {
+                    if (link.IsRequestedPage) {
+                        <li><strong>@link.LinkText</strong></li>
+                    }
+                    else {
+                        <li>@Html.PageLink(link)</li>
+                    }
+                }
+            }
+        </ul>
+        @Html.Partial("Pagination/Bootstrap", pageChain.Links);
+    </div>
+    <div>
+        <ul>
+            @foreach (var item in Model.Page.Items) {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+</body>
+</html>
