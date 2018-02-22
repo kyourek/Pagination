@@ -4,6 +4,8 @@ namespace Pagination {
     public interface IPageSource {
         IPageConfig Config { get; }
         IPageRequest Request { get; }
+        IPageSource SetItemsPerPage(int value);
+        IPageSource SetPageBaseZero(int value);
     }
 
     public interface IPageSource<TItem> : IPageSource {
