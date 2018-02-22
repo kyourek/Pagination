@@ -46,6 +46,20 @@ namespace Pagination.Test {
         }
 
         [Test]
+        public void FindPage_ConsidersItemsPerPageMaximum() {
+            Subject.DefaultRequest.ItemsPerPage = 54321;
+            Subject.SetItemsPerPageMaximum(99);
+            var source = Enumerable
+                .Range(0, 1000)
+                .AsQueryable()
+                .OrderBy(item => item);
+            var page = Subject.FindPage(source);
+            var actual = page.ItemsPerPage;
+            var expected = 99;
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
         public void FindPage_SetsFilterObject() {
             var filter = new object();
             var page = Subject.FindPage(new object[] { }.AsQueryable().OrderBy(obj => obj), filter);
