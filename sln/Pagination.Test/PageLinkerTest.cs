@@ -244,6 +244,57 @@ namespace Pagination.Test {
         }
         #endregion
 
+        #region Numbers
+        [Test]
+        public void Numbers_HasOneLinkPerPage() {
+            Page.PagesTotal = 17;
+            Assert.That(
+                Subject.Numbers().Links.Count(),
+                Is.EqualTo(17));
+        }
+
+        [Test]
+        public void Numbers_HasLinkForEachPage() {
+            Page.PagesTotal = 8;
+            var actual = Subject.Numbers().Links.Select(link => link.LinkPageBaseZero);
+            var expected = Enumerable.Range(0, Page.PagesTotal);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Numbers_LinkTextIsPageBaseOne() {
+            Page.PagesTotal = 11;
+            Assert.That(
+                Subject.Numbers().Links.Select(link => link.LinkText),
+                Is.EqualTo(Enumerable.Range(0, Page.PagesTotal).Select(page => (page + 1).ToString())));
+        }
+
+        [Test]
+        public void Numbers_ContainsOneRequestedPage() {
+            Page.PageBaseZero = 5;
+            Page.PagesTotal = 21;
+            Assert.That(
+                Subject.Numbers().Links.Count(link => link.IsRequestedPage),
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Numbers_RequestedPageIsPageBaseZeroOfPage() {
+            Page.PageBaseZero = 5;
+            Page.PagesTotal = 21;
+            Assert.That(
+                Subject.Numbers().Links.First(link => link.IsRequestedPage).LinkPageBaseZero,
+                Is.EqualTo(Page.PageBaseZero));
+        }
+
+        [Test]
+        public void Numbers_NoneArePageRange() {
+            Page.PagesTotal = 56;
+            Assert.That(
+                Subject.Numbers().Links,
+                Has.None.Property("IsPageRange").True);
+        }
+
         [Test]
         public void Numbers_LinksBase1PagesInSuccession() {
             var page = new Page { PageBaseZero = 8, PagesTotal = 17 };
@@ -273,31 +324,7 @@ namespace Pagination.Test {
                 Assert.IsFalse(l.IsPageRange);
             }
         }
-
-        [Test]
-        public void Prev_ReturnsPrevThenNext() {
-            var req = new PageRequest { ItemsPerPage = 10, PageBaseZero = 2 };
-            var src = new PageSource<int> { Request = req, ItemsSource = Enumerable.Range(1, 50).AsQueryable().OrderBy(i => i) };
-            var page = src.FindPage();
-            var subject = new PageLinker(page);
-            var links = subject.Prev("prev", true).Next("next", true).Links;
-            Assert.IsNotNull(links);
-            Assert.AreEqual(2, links.Count());
-
-            var link1 = links.ElementAt(0);
-            var link2 = links.ElementAt(1);
-
-            Assert.AreEqual("prev", link1.LinkText);
-            Assert.AreEqual("next", link2.LinkText);
-            Assert.AreEqual(1, link1.LinkPageBaseZero);
-            Assert.AreEqual(3, link2.LinkPageBaseZero);
-            Assert.AreSame(page, link1.Page);
-            Assert.AreSame(page, link2.Page);
-            Assert.IsFalse(link1.IsPageRange);
-            Assert.IsFalse(link2.IsPageRange);
-            Assert.IsFalse(link1.IsRequestedPage);
-            Assert.IsFalse(link2.IsRequestedPage);
-        }
+        #endregion
 
         [Test]
         public void Dynamic_HasCorrectLinks() {
