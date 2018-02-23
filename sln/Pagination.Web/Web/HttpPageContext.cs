@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Web;
 
 namespace Pagination.Web {
@@ -19,18 +20,24 @@ namespace Pagination.Web {
             return request;
         }
 
+        PageRequest GetRequestDefault() {
+            var http = Http;
+            var request = http?.Request;
+            return
+                FillRequest(request?.Form,
+                FillRequest(request?.QueryString));
+        }
+
         internal HttpContextBase Http {
             get => _Http ?? (_Http = new HttpContextWrapper(HttpContext.Current));
             set => _Http = value;
         }
         HttpContextBase _Http;
 
-        internal override PageRequest GetRequest() {
-            var http = Http;
-            var request = http?.Request;
-            return 
-                FillRequest(request?.Form,
-                FillRequest(request?.QueryString));
+        Func<PageRequest> _GetRequest;
+        internal override Func<PageRequest> GetRequest {
+            get => _GetRequest ?? (_GetRequest = GetRequestDefault);
+            set => _GetRequest = value;
         }
     }
 }

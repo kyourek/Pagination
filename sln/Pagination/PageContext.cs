@@ -1,18 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Pagination {
     public class PageContext {
-        internal PageRequest DefaultRequest {
-            get => _DefaultRequest ?? (_DefaultRequest = new PageRequest());
-            set => _DefaultRequest = value;
-        }
-        PageRequest _DefaultRequest;
-
-        internal virtual PageRequest GetRequest() {
-            return new PageRequest {
-                ItemsPerPage = DefaultRequest.ItemsPerPage,
-                PageBaseZero = DefaultRequest.PageBaseZero
-            };
+        Func<PageRequest> _GetRequest;
+        internal virtual Func<PageRequest> GetRequest {
+            get => _GetRequest ?? (_GetRequest = () => new PageRequest());
+            set => _GetRequest = value;
         }
 
         public IPageConfig Config => _Config;

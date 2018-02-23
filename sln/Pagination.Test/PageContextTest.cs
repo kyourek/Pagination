@@ -32,7 +32,7 @@ namespace Pagination.Test {
         [TestCase(10)]
         [TestCase(11)]
         public void FindPage_FindsNthPageOfItems(int n) {
-            Subject.DefaultRequest.PageBaseZero = n;
+            Subject.GetRequest = () => new PageRequest { PageBaseZero = n };
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
@@ -47,7 +47,7 @@ namespace Pagination.Test {
 
         [Test]
         public void FindPage_ConsidersItemsPerPageMaximum() {
-            Subject.DefaultRequest.ItemsPerPage = 54321;
+            Subject.GetRequest = () => new PageRequest { ItemsPerPage = 54321 };
             Subject.SetItemsPerPageMaximum(99);
             var source = Enumerable
                 .Range(0, 1000)
@@ -84,7 +84,7 @@ namespace Pagination.Test {
 
         [TestCase(7250, 25)]
         public void FindPage_SetsPagesTotalOfPage(int itemsTotal, int itemsPerPage) {
-            Subject.DefaultRequest.ItemsPerPage = itemsPerPage;
+            Subject.GetRequest = () => new PageRequest { ItemsPerPage = itemsPerPage };
             var source = Enumerable
                 .Range(0, itemsTotal)
                 .AsQueryable()
@@ -106,7 +106,7 @@ namespace Pagination.Test {
         [TestCase(10)]
         [TestCase(11)]
         public void FindPage_SetsPageBaseZeroOfPage(int value) {
-            Subject.DefaultRequest.PageBaseZero = value;
+            Subject.GetRequest = () => new PageRequest { PageBaseZero = value };
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
@@ -120,7 +120,7 @@ namespace Pagination.Test {
         [TestCase(10)]
         [TestCase(11)]
         public void FindPage_SetsPageBaseOneOfPage(int value) {
-            Subject.DefaultRequest.PageBaseZero = value - 1;
+            Subject.GetRequest = () => new PageRequest { PageBaseZero = value - 1 };
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()

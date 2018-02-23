@@ -23,7 +23,7 @@ namespace Pagination.Web.Routing {
 
         [Test]
         public void RouteValues_GetsItemsPerPageFromRequest() {
-            Subject.DefaultRequest.ItemsPerPage = 210;
+            Subject.GetRequest = () => new PageRequest { ItemsPerPage = 210 };
             var route = PageContextExtension.RouteValues(Subject, new object());
             Assert.That(route[Subject.Config.ItemsPerPageKey], Is.EqualTo(210));
         }
@@ -49,7 +49,7 @@ namespace Pagination.Web.Routing {
 
         [Test]
         public void RouteValues_GetsPageBaseZeroFromRequest() {
-            Subject.DefaultRequest.PageBaseZero = 9801;
+            Subject.GetRequest = () => new PageRequest { PageBaseZero = 9801 };
             var route = PageContextExtension.RouteValues(Subject, null);
             Assert.That(route[Subject.Config.PageBaseZeroKey], Is.EqualTo(9801));
         }
