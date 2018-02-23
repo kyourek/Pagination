@@ -8,8 +8,8 @@ namespace Pagination.Web.Routing {
         }
         static PageRouter _Router;
 
-        public static RouteValueDictionary RouteValues(this IPage page, int? pageBaseZero = null) {
-            return Router.GetRouteValues(page, pageBaseZero);
+        public static RouteValueDictionary RouteValues(this IPage page, int? pageBaseZero = null, int? itemsPerPage = null) {
+            return Router.GetRouteValues(page, pageBaseZero, itemsPerPage);
         }
     }
 }
