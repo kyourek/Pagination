@@ -5,6 +5,245 @@ using NUnit.Framework;
 namespace Pagination.Test {
     [TestFixture, TestOf(typeof(PageLinker))]
     public class PageLinkerTest {
+        Page Page => _Page ?? (_Page = new Page());
+        Page _Page;
+
+        IPageLinker Subject => _Subject ?? (_Subject = new PageLinker(Page));
+        IPageLinker _Subject;
+
+        [SetUp]
+        public void SetUp() {
+            _Page = null;
+            _Subject = null;
+        }
+
+        #region Prev
+        [Test]
+        public void Prev_GetsSingleLink() {
+            Assert.That(
+                Subject.Prev().Links.Count(),
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Prev_GetsNoLinksIfNotForced() {
+            Assert.That(
+                Subject.Prev(force: false).Links.Count(),
+                Is.Zero);
+        }
+
+        [Test]
+        public void Prev_GetsSingleLinkIfAvailable() {
+            Page.PageBaseZero = 1;
+            Assert.That(
+                Subject.Prev(force: false).Links.Count(),
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Prev_DefaultTextIsLessThan() {
+            Assert.That(
+                Subject.Prev().Links.First().LinkText,
+                Is.EqualTo("<"));
+        }
+
+        [Test]
+        public void Prev_LinkTextIsTakenFromArgument() {
+            Assert.That(
+                Subject.Prev(text: "PREV").Links.First().LinkText,
+                Is.EqualTo("PREV"));
+        }
+
+        [Test]
+        public void Prev_LinkPageIsZero() {
+            Assert.That(
+                Subject.Prev().Links.First().LinkPageBaseZero,
+                Is.Zero);
+        }
+
+        [Test]
+        public void Prev_LinkPageBaseOneIsOne() {
+            Assert.That(
+                Subject.Prev().Links.First().LinkPageBaseOne,
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Prev_LowerPageBaseZeroEqualsLinkPageBaseZero() {
+            Page.PageBaseZero = 5;
+            Assert.That(
+                Subject.Prev().Links.First().LowerPageBaseZero,
+                Is.EqualTo(4));
+        }
+
+        [Test]
+        public void Prev_UpperPageBaseZeroEqualsLinkPageBaseZero() {
+            Page.PageBaseZero = 11;
+            Assert.That(
+                Subject.Prev().Links.First().UpperPageBaseZero,
+                Is.EqualTo(10));
+        }
+
+        [Test]
+        public void Prev_LowerPageBaseOneEqualsLinkPageBaseOne() {
+            Page.PageBaseZero = 5;
+            Assert.That(
+                Subject.Prev().Links.First().LowerPageBaseOne,
+                Is.EqualTo(5));
+        }
+
+        [Test]
+        public void Prev_UpperPageBaseOneEqualsLinkPageBaseOne() {
+            Page.PageBaseZero = 11;
+            Assert.That(
+                Subject.Prev().Links.First().UpperPageBaseOne,
+                Is.EqualTo(11));
+        }
+
+        [Test]
+        public void Prev_IsPageRangeIsFalse() {
+            Assert.That(
+                Subject.Prev().Links.First().IsPageRange,
+                Is.False);
+        }
+
+        [Test]
+        public void Prev_IsRequestedPageIsTrueIfNonePreceding() {
+            Assert.That(
+                Subject.Prev().Links.First().IsRequestedPage,
+                Is.True);
+        }
+
+        [Test]
+        public void Prev_IsRequestedPageIsFalseIfNotFirstPage() {
+            Page.PageBaseZero = 1;
+            Assert.That(
+                Subject.Prev().Links.First().IsRequestedPage,
+                Is.False);
+        }
+
+        [Test]
+        public void Prev_PageIsInstance() {
+            Assert.That(
+                Subject.Prev().Links.First().Page,
+                Is.SameAs(Page));
+        }
+        #endregion
+
+        #region Next
+        [Test]
+        public void Next_GetsSingleLink() {
+            Assert.That(
+                Subject.Next().Links.Count(),
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Next_GetsNoLinksIfNotForced() {
+            Assert.That(
+                Subject.Next(force: false).Links.Count(),
+                Is.Zero);
+        }
+
+        [Test]
+        public void Next_GetsSingleLinkIfAvailable() {
+            Page.PageBaseZero = 1;
+            Page.PagesTotal = 3;
+            Assert.That(
+                Subject.Next(force: false).Links.Count(),
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Next_DefaultTextIsGreaterThan() {
+            Assert.That(
+                Subject.Next().Links.First().LinkText,
+                Is.EqualTo(">"));
+        }
+
+        [Test]
+        public void Next_LinkTextIsTakenFromArgument() {
+            Assert.That(
+                Subject.Next(text: "Next").Links.First().LinkText,
+                Is.EqualTo("Next"));
+        }
+
+        [Test]
+        public void Next_LinkPageIsZero() {
+            Assert.That(
+                Subject.Next().Links.First().LinkPageBaseZero,
+                Is.Zero);
+        }
+
+        [Test]
+        public void Next_LinkPageBaseOneIsOne() {
+            Assert.That(
+                Subject.Next().Links.First().LinkPageBaseOne,
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Next_LowerPageBaseZeroEqualsLinkPageBaseZero() {
+            Page.PageBaseZero = 5;
+            Assert.That(
+                Subject.Next().Links.First().LowerPageBaseZero,
+                Is.EqualTo(5));
+        }
+
+        [Test]
+        public void Next_UpperPageBaseZeroEqualsLinkPageBaseZero() {
+            Page.PageBaseZero = 11;
+            Assert.That(
+                Subject.Next().Links.First().UpperPageBaseZero,
+                Is.EqualTo(11));
+        }
+
+        [Test]
+        public void Next_LowerPageBaseOneEqualsLinkPageBaseOne() {
+            Page.PageBaseZero = 5;
+            Assert.That(
+                Subject.Next().Links.First().LowerPageBaseOne,
+                Is.EqualTo(6));
+        }
+
+        [Test]
+        public void Next_UpperPageBaseOneEqualsLinkPageBaseOne() {
+            Page.PageBaseZero = 11;
+            Assert.That(
+                Subject.Next().Links.First().UpperPageBaseOne,
+                Is.EqualTo(12));
+        }
+
+        [Test]
+        public void Next_IsPageRangeIsFalse() {
+            Assert.That(
+                Subject.Next().Links.First().IsPageRange,
+                Is.False);
+        }
+
+        [Test]
+        public void Next_IsRequestedPageIsTrueIfNoneFollowing() {
+            Assert.That(
+                Subject.Next().Links.First().IsRequestedPage,
+                Is.True);
+        }
+
+        [Test]
+        public void Next_IsRequestedPageIsFalseIfNotLastPage() {
+            Page.PagesTotal = 2;
+            Assert.That(
+                Subject.Next().Links.First().IsRequestedPage,
+                Is.False);
+        }
+
+        [Test]
+        public void Next_PageIsInstance() {
+            Assert.That(
+                Subject.Next().Links.First().Page,
+                Is.SameAs(Page));
+        }
+        #endregion
+
         [Test]
         public void Numbers_LinksBase1PagesInSuccession() {
             var page = new Page { PageBaseZero = 8, PagesTotal = 17 };
