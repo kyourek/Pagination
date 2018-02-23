@@ -8,7 +8,7 @@ namespace Pagination {
         int ItemsPerPage { get; }
         int ItemsTotal { get; }
         IQueryable Items { get; }
-        object Filter { get; }
+        object State { get; }
         IPageConfig Config { get; }
         IPageLinker Linker();
     }
@@ -17,7 +17,7 @@ namespace Pagination {
         new IQueryable<TItem> Items { get; }
     }
 
-    public interface IPage<TItem, TFilter> : IPage<TItem> {
-        new TFilter Filter { get; }
+    public interface IPage<TItem, TState> : IPage<TItem> {
+        new TState State { get; }
     }
 }

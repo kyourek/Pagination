@@ -7,7 +7,7 @@ namespace Pagination {
         public int ItemsPerPage { get; set; }
         public int ItemsTotal { get; set; }
         public IQueryable Items { get; set; }
-        public object Filter { get; set; }
+        public object State { get; set; }
 
         public int PageBaseOne => PageBaseZero + 1;
 
@@ -27,10 +27,10 @@ namespace Pagination {
         }
     }
 
-    class Page<TItem, TFilter> : Page<TItem>, IPage<TItem, TFilter> {
-        public new TFilter Filter {
-            get => (TFilter)base.Filter;
-            set => base.Filter = value;
+    class Page<TItem, TState> : Page<TItem>, IPage<TItem, TState> {
+        public new TState State {
+            get => (TState)base.State;
+            set => base.State = value;
         }
     }
 }

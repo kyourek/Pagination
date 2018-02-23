@@ -8,7 +8,7 @@ namespace Pagination.Sample.Controllers {
     using Web;
 
     public class HomeController : Controller {
-        public ActionResult Index(FilterModel filter) {
+        public ActionResult Index(StateModel state) {
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => {
                     try {
@@ -22,10 +22,10 @@ namespace Pagination.Sample.Controllers {
                 .Distinct()
                 .AsQueryable();
 
-            var searchText = filter.SearchText;
+            var searchText = state.SearchText;
             if (!string.IsNullOrWhiteSpace(searchText)) types = types.Where(t => t.Contains(searchText));
 
-            var page = new HttpPageContext().FindPage(types.OrderBy(type => type), filter);
+            var page = new HttpPageContext().FindPage(types.OrderBy(type => type), state);
 
             return View(new IndexModel {
                 Page = page

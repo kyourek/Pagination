@@ -11,7 +11,7 @@ namespace Pagination.Web.Routing {
             var page = new Page {
                 ItemsPerPage = 12,
                 PageBaseZero = 511,
-                Filter = new {
+                State = new {
                     Width = 38,
                     Type = "Appliance"
                 }
@@ -28,7 +28,7 @@ namespace Pagination.Web.Routing {
             var page = new Page {
                 ItemsPerPage = 12,
                 PageBaseZero = 511,
-                Filter = new {
+                State = new {
                     Width = 38,
                     Type = "Appliance"
                 }

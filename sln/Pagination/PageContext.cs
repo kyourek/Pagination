@@ -26,10 +26,10 @@ namespace Pagination {
             };
         }
 
-        public IPageSource<TItem, TFilter> GetSource<TItem, TFilter>(IOrderedQueryable<TItem> itemsSource, TFilter filter) {
-            return new PageSource<TItem, TFilter> {
+        public IPageSource<TItem, TState> GetSource<TItem, TState>(IOrderedQueryable<TItem> itemsSource, TState state) {
+            return new PageSource<TItem, TState> {
                 Config = Config,
-                Filter = filter,
+                State = state,
                 ItemsSource = itemsSource,
                 Request = GetRequest()
             };
@@ -39,8 +39,8 @@ namespace Pagination {
             return GetSource(itemsSource).FindPage();
         }
 
-        public IPage<TItem, TFilter> FindPage<TItem, TFilter>(IOrderedQueryable<TItem> itemsSource, TFilter filter) {
-            return GetSource(itemsSource, filter).FindPage();
+        public IPage<TItem, TState> FindPage<TItem, TState>(IOrderedQueryable<TItem> itemsSource, TState state) {
+            return GetSource(itemsSource, state).FindPage();
         }
 
         public PageContext SetItemsPerPageDefault(int value) {

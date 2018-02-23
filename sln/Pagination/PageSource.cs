@@ -29,7 +29,7 @@ namespace Pagination {
     }
 
     class PageSource<TItem> : PageSource, IPageSource<TItem> {
-        protected IPage<TItem, TFilter> FindPage<TFilter>(TFilter filter) {
+        protected IPage<TItem, TState> FindPage<TState>(TState state) {
             var src = ItemsSource;
             var req = Request;
             var cnf = Config;
@@ -51,14 +51,14 @@ namespace Pagination {
                 .Skip(itemsPerPage * pageBaseZero)
                 .Take(itemsPerPage);
 
-            return new Page<TItem, TFilter> {
+            return new Page<TItem, TState> {
                 Config = cnf,
                 Items = items,
                 ItemsPerPage = itemsPerPage,
                 ItemsTotal = itemsTotal,
                 PageBaseZero = pageBaseZero,
                 PagesTotal = pagesTotal,
-                Filter = filter
+                State = state
             };
         }
 
@@ -81,19 +81,19 @@ namespace Pagination {
         }
     }
 
-    class PageSource<TItem, TFilter> : PageSource<TItem>, IPageSource<TItem, TFilter> {
-        public TFilter Filter { get; set; }
+    class PageSource<TItem, TState> : PageSource<TItem>, IPageSource<TItem, TState> {
+        public TState State { get; set; }
 
-        public new IPage<TItem, TFilter> FindPage() {
-            return FindPage(Filter);
+        public new IPage<TItem, TState> FindPage() {
+            return FindPage(State);
         }
 
-        public new IPageSource<TItem, TFilter> SetItemsPerPage(int value) {
-            return (IPageSource<TItem, TFilter>)base.SetItemsPerPage(value);
+        public new IPageSource<TItem, TState> SetItemsPerPage(int value) {
+            return (IPageSource<TItem, TState>)base.SetItemsPerPage(value);
         }
 
-        public new IPageSource<TItem, TFilter> SetPageBaseZero(int value) {
-            return (IPageSource<TItem, TFilter>)base.SetPageBaseZero(value);
+        public new IPageSource<TItem, TState> SetPageBaseZero(int value) {
+            return (IPageSource<TItem, TState>)base.SetPageBaseZero(value);
         }
     }
 }

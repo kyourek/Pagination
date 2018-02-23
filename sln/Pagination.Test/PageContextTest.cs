@@ -60,10 +60,10 @@ namespace Pagination.Test {
         }
 
         [Test]
-        public void FindPage_SetsFilterObject() {
-            var filter = new object();
-            var page = Subject.FindPage(new object[] { }.AsQueryable().OrderBy(obj => obj), filter);
-            Assert.That(page.Filter, Is.SameAs(filter));
+        public void FindPage_SetsStateObject() {
+            var state = new object();
+            var page = Subject.FindPage(new object[] { }.AsQueryable().OrderBy(obj => obj), state);
+            Assert.That(page.State, Is.SameAs(state));
         }
 
         [Test]

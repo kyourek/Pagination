@@ -1,5 +1,5 @@
 ﻿namespace Pagination.Sample.Models.Home {
-    public class FilterModel {
+    public class StateModel {
         public string SearchText { get; set; }
     }
 }

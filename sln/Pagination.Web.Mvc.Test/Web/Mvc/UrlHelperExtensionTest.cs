@@ -46,7 +46,7 @@ namespace Pagination.Web.Mvc {
         [Test]
         public void PageLink_CreatesUrlForPage() {
             Subject.RouteCollection.MapRoute("Test", "homepage");
-            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var page = new Page { ItemsPerPage = 54, State = new { Color = "blue" } };
             var pageLink = new PageLink(page, 2, "2");
             var actual = UrlHelperExtension.PageLink(Subject, pageLink);
             var expected = "/homepage?Color=blue&_p_ipp=54&_p_pbz=2";
@@ -56,7 +56,7 @@ namespace Pagination.Web.Mvc {
         [Test]
         public void PageLink_ThrowsIfPageLinkIsNull() {
             Subject.RouteCollection.MapRoute("Test", "homepage");
-            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var page = new Page { ItemsPerPage = 54, State = new { Color = "blue" } };
             var pageLink = new PageLink(page, 2, "2");
             Assert.That(() =>
                 UrlHelperExtension.PageLink(Subject, null),
@@ -67,7 +67,7 @@ namespace Pagination.Web.Mvc {
         [Test]
         public void PageLink_ThrowsIfUrlHelperIsNull() {
             Subject.RouteCollection.MapRoute("Test", "homepage");
-            var page = new Page { ItemsPerPage = 54, Filter = new { Color = "blue" } };
+            var page = new Page { ItemsPerPage = 54, State = new { Color = "blue" } };
             var pageLink = new PageLink(page, 2, "2");
             Assert.That(() =>
                 UrlHelperExtension.PageLink(null, pageLink),

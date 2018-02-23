@@ -15,10 +15,10 @@ namespace Pagination {
         new IPageSource<TItem> SetPageBaseZero(int value);
     }
 
-    public interface IPageSource<TItem, TFilter> : IPageSource<TItem> {
-        TFilter Filter { get; }
-        new IPage<TItem, TFilter> FindPage();
-        new IPageSource<TItem, TFilter> SetItemsPerPage(int value);
-        new IPageSource<TItem, TFilter> SetPageBaseZero(int value);
+    public interface IPageSource<TItem, TState> : IPageSource<TItem> {
+        TState State { get; }
+        new IPage<TItem, TState> FindPage();
+        new IPageSource<TItem, TState> SetItemsPerPage(int value);
+        new IPageSource<TItem, TState> SetPageBaseZero(int value);
     }
 }
