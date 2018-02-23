@@ -61,6 +61,7 @@ namespace Pagination {
                 Filter = filter
             };
         }
+
         public IOrderedQueryable<TItem> ItemsSource {
             get => _Query ?? (_Query = new TItem[] { }.AsQueryable().OrderBy(item => item));
             set => _Query = value;
@@ -70,6 +71,14 @@ namespace Pagination {
         public IPage<TItem> FindPage() {
             return FindPage(default(object));
         }
+
+        public new IPageSource<TItem> SetItemsPerPage(int value) {
+            return (IPageSource<TItem>)base.SetItemsPerPage(value);
+        }
+
+        public new IPageSource<TItem> SetPageBaseZero(int value) {
+            return (IPageSource<TItem>)base.SetPageBaseZero(value);
+        }
     }
 
     class PageSource<TItem, TFilter> : PageSource<TItem>, IPageSource<TItem, TFilter> {
@@ -77,6 +86,14 @@ namespace Pagination {
 
         public new IPage<TItem, TFilter> FindPage() {
             return FindPage(Filter);
+        }
+
+        public new IPageSource<TItem, TFilter> SetItemsPerPage(int value) {
+            return (IPageSource<TItem, TFilter>)base.SetItemsPerPage(value);
+        }
+
+        public new IPageSource<TItem, TFilter> SetPageBaseZero(int value) {
+            return (IPageSource<TItem, TFilter>)base.SetPageBaseZero(value);
         }
     }
 }

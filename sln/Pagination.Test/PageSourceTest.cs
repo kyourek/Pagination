@@ -26,6 +26,18 @@ namespace Pagination.Test {
             Assert.That(Subject.SetItemsPerPage(1), Is.SameAs(Subject));
         }
 
+        [Test]
+        public void SetItemsPerPage_ReturnsInstanceOfGenericType() {
+            var subject = new PageSource<string>();
+            Assert.That(subject.SetItemsPerPage(12), Is.SameAs(subject));
+        }
+
+        [Test]
+        public void SetItemsPerPage_ReturnsInstanceOfGenericType2() {
+            var subject = new PageSource<string, object>();
+            Assert.That(subject.SetItemsPerPage(12), Is.SameAs(subject));
+        }
+
         [TestCase(1)]
         [TestCase(33)]
         public void SetPageBaseZero_SetsRequestValue(int value) {
@@ -36,6 +48,18 @@ namespace Pagination.Test {
         [Test]
         public void SetPageBaseZero_ReturnsInstance() {
             Assert.That(Subject.SetPageBaseZero(1), Is.SameAs(Subject));
+        }
+
+        [Test]
+        public void SetPageBaseZero_ReturnsInstanceOfGenericType() {
+            var subject = new PageSource<string>();
+            Assert.That(subject.SetPageBaseZero(5), Is.SameAs(subject));
+        }
+
+        [Test]
+        public void SetPageBaseZero_ReturnsInstanceOfGenericType2() {
+            var subject = new PageSource<string, object>();
+            Assert.That(subject.SetPageBaseZero(5), Is.SameAs(subject));
         }
     }
 }
