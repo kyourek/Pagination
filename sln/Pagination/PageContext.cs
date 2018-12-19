@@ -29,12 +29,22 @@ namespace Pagination {
             };
         }
 
+        [Obsolete("Use 'ReadPage' instead.")]
         public IPage<TItem> FindPage<TItem>(IOrderedQueryable<TItem> itemsSource) {
-            return GetSource(itemsSource).FindPage();
+            return ReadPage(itemsSource);
         }
 
+        public IPage<TItem> ReadPage<TItem>(IOrderedQueryable<TItem> itemsSource) {
+            return GetSource(itemsSource).ReadPage();
+        }
+
+        [Obsolete("Use 'ReadPage' instead.")]
         public IPage<TItem, TState> FindPage<TItem, TState>(IOrderedQueryable<TItem> itemsSource, TState state) {
-            return GetSource(itemsSource, state).FindPage();
+            return ReadPage(itemsSource, state);
+        }
+
+        public IPage<TItem, TState> ReadPage<TItem, TState>(IOrderedQueryable<TItem> itemsSource, TState state) {
+            return GetSource(itemsSource, state).ReadPage();
         }
 
         public PageContext SetItemsPerPageDefault(int value) {

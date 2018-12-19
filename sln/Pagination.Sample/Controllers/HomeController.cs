@@ -25,7 +25,7 @@ namespace Pagination.Sample.Controllers {
             var searchText = state.SearchText;
             if (!string.IsNullOrWhiteSpace(searchText)) types = types.Where(t => t.Contains(searchText));
 
-            var page = new HttpPageContext().FindPage(types.OrderBy(type => type), state);
+            var page = new HttpPageContext().ReadPage(types.OrderBy(type => type), state);
 
             return View(new IndexModel {
                 Page = page

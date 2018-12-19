@@ -14,14 +14,14 @@ namespace Pagination.Test {
             _Subject = null;
         }
 
-        #region FindPage
+        #region ReadPage
         [Test]
-        public void FindPage_FindsFirstPageOfItems() {
+        public void ReadPage_FindsFirstPageOfItems() {
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             var actual = page.Items;
             var expected = source.Take(Subject.Config.ItemsPerPageDefault);
             CollectionAssert.AreEqual(expected, actual);
@@ -31,13 +31,13 @@ namespace Pagination.Test {
         [TestCase(2)]
         [TestCase(10)]
         [TestCase(11)]
-        public void FindPage_FindsNthPageOfItems(int n) {
+        public void ReadPage_FindsNthPageOfItems(int n) {
             Subject.GetRequest = () => new PageRequest { PageBaseZero = n };
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             var actual = page.Items;
             var expected = source
                 .Skip(n * Subject.Config.ItemsPerPageDefault)
@@ -46,58 +46,58 @@ namespace Pagination.Test {
         }
 
         [Test]
-        public void FindPage_ConsidersItemsPerPageMaximum() {
+        public void ReadPage_ConsidersItemsPerPageMaximum() {
             Subject.GetRequest = () => new PageRequest { ItemsPerPage = 54321 };
             Subject.SetItemsPerPageMaximum(99);
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             var actual = page.ItemsPerPage;
             var expected = 99;
             Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
-        public void FindPage_SetsStateObject() {
+        public void ReadPage_SetsStateObject() {
             var state = new object();
-            var page = Subject.FindPage(new object[] { }.AsQueryable().OrderBy(obj => obj), state);
+            var page = Subject.ReadPage(new object[] { }.AsQueryable().OrderBy(obj => obj), state);
             Assert.That(page.State, Is.SameAs(state));
         }
 
         [Test]
-        public void FindPage_ReturnsNoItemsIfItemsSourceIsNull() {
-            var page = Subject.FindPage(default(IOrderedQueryable<string>));
+        public void ReadPage_ReturnsNoItemsIfItemsSourceIsNull() {
+            var page = Subject.ReadPage(default(IOrderedQueryable<string>));
             Assert.That(page.Items.Count(), Is.Zero);
         }
 
         [Test]
-        public void FindPage_SetsItemsTotalOfPage() {
+        public void ReadPage_SetsItemsTotalOfPage() {
             var source = Enumerable
                 .Range(0, 8761)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             Assert.That(page.ItemsTotal, Is.EqualTo(8761));
         }
 
         [TestCase(7250, 25)]
-        public void FindPage_SetsPagesTotalOfPage(int itemsTotal, int itemsPerPage) {
+        public void ReadPage_SetsPagesTotalOfPage(int itemsTotal, int itemsPerPage) {
             Subject.GetRequest = () => new PageRequest { ItemsPerPage = itemsPerPage };
             var source = Enumerable
                 .Range(0, itemsTotal)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             var actual = page.PagesTotal;
             var expected = (int)Math.Ceiling((double)itemsTotal / itemsPerPage);
             Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
-        public void FindPage_SetsConfigOfPage() {
-            var page = Subject.FindPage(default(IOrderedQueryable<string>));
+        public void ReadPage_SetsConfigOfPage() {
+            var page = Subject.ReadPage(default(IOrderedQueryable<string>));
             Assert.That(page.Config, Is.SameAs(Subject.Config));
         }
 
@@ -105,13 +105,13 @@ namespace Pagination.Test {
         [TestCase(2)]
         [TestCase(10)]
         [TestCase(11)]
-        public void FindPage_SetsPageBaseZeroOfPage(int value) {
+        public void ReadPage_SetsPageBaseZeroOfPage(int value) {
             Subject.GetRequest = () => new PageRequest { PageBaseZero = value };
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             Assert.That(page.PageBaseZero, Is.EqualTo(value));
         }
 
@@ -119,13 +119,13 @@ namespace Pagination.Test {
         [TestCase(2)]
         [TestCase(10)]
         [TestCase(11)]
-        public void FindPage_SetsPageBaseOneOfPage(int value) {
+        public void ReadPage_SetsPageBaseOneOfPage(int value) {
             Subject.GetRequest = () => new PageRequest { PageBaseZero = value - 1 };
             var source = Enumerable
                 .Range(0, 1000)
                 .AsQueryable()
                 .OrderBy(item => item);
-            var page = Subject.FindPage(source);
+            var page = Subject.ReadPage(source);
             Assert.That(page.PageBaseOne, Is.EqualTo(value));
         }
         #endregion

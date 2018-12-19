@@ -29,7 +29,7 @@ namespace Pagination {
     }
 
     class PageSource<TItem> : PageSource, IPageSource<TItem> {
-        protected IPage<TItem, TState> FindPage<TState>(TState state) {
+        protected IPage<TItem, TState> ReadPage<TState>(TState state) {
             var src = ItemsSource;
             var req = Request;
             var cnf = Config;
@@ -68,8 +68,13 @@ namespace Pagination {
         }
         IOrderedQueryable<TItem> _Query;
 
+        [Obsolete("Use 'ReadPage' instead.")]
         public IPage<TItem> FindPage() {
-            return FindPage(default(object));
+            return ReadPage();
+        }
+
+        public IPage<TItem> ReadPage() {
+            return ReadPage(default(object));
         }
 
         public new IPageSource<TItem> SetItemsPerPage(int value) {
@@ -84,8 +89,13 @@ namespace Pagination {
     class PageSource<TItem, TState> : PageSource<TItem>, IPageSource<TItem, TState> {
         public TState State { get; set; }
 
+        [Obsolete("Use 'ReadPage' instead.")]
         public new IPage<TItem, TState> FindPage() {
-            return FindPage(State);
+            return ReadPage();
+        }
+
+        public new IPage<TItem, TState> ReadPage() {
+            return ReadPage(State);
         }
 
         public new IPageSource<TItem, TState> SetItemsPerPage(int value) {
