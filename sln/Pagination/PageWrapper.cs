@@ -1,11 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Pagination {
     public class PageWrapper : IPage {
         public IPage Page { get; }
 
         public PageWrapper(IPage page) {
-            Page = page;
+            Page = page ?? throw new ArgumentNullException(nameof(page));
         }
 
         int IPage.PageBaseZero => Page.PageBaseZero;
@@ -23,7 +24,7 @@ namespace Pagination {
         public new IPage<TItem> Page { get; }
 
         public PageWrapper(IPage<TItem> page) : base(page) {
-            Page = page;
+            Page = page ?? throw new ArgumentNullException(nameof(page));
         }
 
         IQueryable<TItem> IPage<TItem>.Items => Page.Items;
@@ -33,7 +34,7 @@ namespace Pagination {
         public new IPage<TItem, TState> Page { get; }
 
         public PageWrapper(IPage<TItem, TState> page) : base(page) {
-            Page = page;
+            Page = page ?? throw new ArgumentNullException(nameof(page));
         }
 
         TState IPage<TItem, TState>.State => Page.State;

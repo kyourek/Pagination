@@ -113,5 +113,35 @@ namespace Pagination.Test {
             Page.State = new object();
             Assert.That(((IPage)Subject[i]).State, Is.SameAs(Page.State));
         }
+
+        [Test]
+        public void Constructor0_ThrowsArgumentNullExceptionIfPageIsNull() {
+            Assert.That(() => new PageWrapper(null), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void Constructor1_ThrowsArgumentNullExceptionIfPageIsNull() {
+            Assert.That(() => new PageWrapper<object>(null), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void Constructor2_ThrowsArgumentNullExceptionIfPageIsNull() {
+            Assert.That(() => new PageWrapper<object, object>(null), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void Constructor0_ArgumentNullExceptionHasNameOfArgument() {
+            Assert.That(() => new PageWrapper(null), Throws.Exception.With.Property("ParamName").EqualTo("page"));
+        }
+
+        [Test]
+        public void Constructor1_ArgumentNullExceptionHasNameOfArgument() {
+            Assert.That(() => new PageWrapper<object>(null), Throws.Exception.With.Property("ParamName").EqualTo("page"));
+        }
+
+        [Test]
+        public void Constructor2_ArgumentNullExceptionHasNameOfArgument() {
+            Assert.That(() => new PageWrapper<object, object>(null), Throws.Exception.With.Property("ParamName").EqualTo("page"));
+        }
     }
 }
