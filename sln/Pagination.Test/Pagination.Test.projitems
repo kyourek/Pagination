@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageContextTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageLinkerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageSourceTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageWrapperTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyCompany.cs">
       <Link>Properties\AssemblyCompany.cs</Link>

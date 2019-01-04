@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageLinker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\AssemblyCompany.cs">
       <Link>Properties\AssemblyCompany.cs</Link>
