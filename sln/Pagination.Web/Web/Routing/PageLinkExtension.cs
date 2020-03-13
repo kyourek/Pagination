@@ -1,5 +1,10 @@
 ﻿using System;
+
+#if NETCOREAPP
+using Microsoft.AspNetCore.Routing;
+#else
 using System.Web.Routing;
+#endif
 
 namespace Pagination.Web.Routing {
     public static class PageLinkExtension {

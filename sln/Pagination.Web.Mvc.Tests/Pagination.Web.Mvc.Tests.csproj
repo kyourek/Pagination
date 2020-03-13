@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>net40;net45</TargetFrameworks>
+        <RootNamespace>Pagination</RootNamespace>
+        <Description>Pagination Web MVC Tests</Description>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="NUnit" Version="3.12.0" />
+      <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Pagination.Web.Mvc\Pagination.Web.Mvc.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="System.Web" />
+    </ItemGroup>
+</Project>

@@ -1,4 +1,8 @@
-﻿using System.Web.Routing;
+﻿#if NETCOREAPP
+using Microsoft.AspNetCore.Routing;
+#else
+using System.Web.Routing;
+#endif
 
 namespace Pagination.Web.Routing {
     public static class PageContextExtension {
@@ -6,10 +10,9 @@ namespace Pagination.Web.Routing {
             get => _Router ?? (_Router = new PageRouter());
             set => _Router = value;
         }
-        static PageRouter _Router;
+        private static PageRouter _Router;
 
-        public static RouteValueDictionary RouteValues(this PageContext pageContext, object state, int? pageBaseZero = null, int? itemsPerPage = null) {
-            return Router.GetRouteValues(pageContext, state, pageBaseZero, itemsPerPage);
-        }
+        public static RouteValueDictionary RouteValues(this PageContext pageContext, object state, int? pageBaseZero = null, int? itemsPerPage = null) =>
+            Router.GetRouteValues(pageContext, state, pageBaseZero, itemsPerPage);
     }
 }

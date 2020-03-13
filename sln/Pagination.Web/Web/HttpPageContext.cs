@@ -1,43 +1,49 @@
 ﻿using System;
-using System.Collections.Specialized;
+
+#if NETCOREAPP
+using HTTPREQUEST = Microsoft.AspNetCore.Http.HttpRequest;
+#else
 using System.Web;
+using HTTPREQUEST = System.Web.HttpRequestBase;
+#endif
 
 namespace Pagination.Web {
     public class HttpPageContext : PageContext {
-        static int? GetValue(NameValueCollection collection, string name) {
-            if (collection != null) {
-                if (int.TryParse(collection[name], out int i)) {
-                    return i;
-                }
-            }
-            return null;
+        private static int? GetValue(string s) =>
+            int.TryParse(s, out var i)
+                ? i
+                : default(int?);
+
+        private PageRequest PageRequestFactoryDefault() {
+            var request = Request;
+            var requestForm = request?.Form;
+#if NETCOREAPP
+            var requestQuery = request?.Query;
+#else
+            var requestQuery = request?.QueryString;
+#endif
+            var ipp = Config.ItemsPerPageKey;
+            var pbz = Config.PageBaseZeroKey;
+
+            return new PageRequest {
+                ItemsPerPage = GetValue(requestForm?[ipp]) ?? GetValue(requestQuery?[ipp]),
+                PageBaseZero = GetValue(requestForm?[pbz]) ?? GetValue(requestQuery?[pbz])
+            };
         }
 
-        PageRequest FillRequest(NameValueCollection collection, PageRequest request = null) {
-            request = request ?? new PageRequest();
-            request.ItemsPerPage = GetValue(collection, Config.ItemsPerPageKey) ?? request.ItemsPerPage;
-            request.PageBaseZero = GetValue(collection, Config.PageBaseZeroKey) ?? request.PageBaseZero;
-            return request;
+        internal override Func<PageRequest> PageRequestFactory {
+            get => _PageRequestFactory ?? (_PageRequestFactory = PageRequestFactoryDefault);
+            set => _PageRequestFactory = value;
         }
+        private Func<PageRequest> _PageRequestFactory;
 
-        PageRequest GetRequestDefault() {
-            var http = Http;
-            var request = http?.Request;
-            return
-                FillRequest(request?.Form,
-                FillRequest(request?.QueryString));
-        }
+        public HTTPREQUEST Request { get; }
 
-        internal HttpContextBase Http {
-            get => _Http ?? (_Http = new HttpContextWrapper(HttpContext.Current));
-            set => _Http = value;
-        }
-        HttpContextBase _Http;
-
-        Func<PageRequest> _GetRequest;
-        internal override Func<PageRequest> GetRequest {
-            get => _GetRequest ?? (_GetRequest = GetRequestDefault);
-            set => _GetRequest = value;
+        public HttpPageContext(HTTPREQUEST request = null) {
+            Request = request;
+#if !NETCOREAPP
+            Request = Request ?? new HttpRequestWrapper(HttpContext.Current.Request);
+#endif
         }
     }
 }

@@ -139,18 +139,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyCompany.cs">
-      <Link>Properties\AssemblyCompany.cs</Link>
-    </Compile>
-    <Compile Include="..\AssemblyCopyright.cs">
-      <Link>Properties\AssemblyCopyright.cs</Link>
-    </Compile>
-    <Compile Include="..\AssemblyVersion.cs">
-      <Link>Properties\AssemblyVersion.cs</Link>
-    </Compile>
-    <Compile Include="..\ComVisible.cs">
-      <Link>Properties\ComVisible.cs</Link>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,17 +194,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pagination-net40\Pagination-net40.csproj">
-      <Project>{483ca936-e9dd-4e85-9192-5f0ed62a3273}</Project>
-      <Name>Pagination-net40</Name>
+    <ProjectReference Include="..\Pagination.Web.Mvc\Pagination.Web.Mvc.csproj">
+      <Project>{c67e7cd5-16e8-494f-992d-949a675bf84b}</Project>
+      <Name>Pagination.Web.Mvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pagination.Web-net40\Pagination.Web-net40.csproj">
-      <Project>{88d72793-0572-489c-8ef7-0c4dd3758be7}</Project>
-      <Name>Pagination.Web-net40</Name>
+    <ProjectReference Include="..\Pagination.Web\Pagination.Web.csproj">
+      <Project>{c6be6e20-7e3c-4416-8dd2-ac6515054d20}</Project>
+      <Name>Pagination.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pagination.Web.Mvc-net40\Pagination.Web.Mvc-net40.csproj">
-      <Project>{59352b19-3803-4d78-bd56-0e995bd337a6}</Project>
-      <Name>Pagination.Web.Mvc-net40</Name>
+    <ProjectReference Include="..\Pagination\Pagination.csproj">
+      <Project>{c1f9acc8-38b9-4e80-8097-740693bc6eba}</Project>
+      <Name>Pagination</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

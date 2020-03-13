@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>net40;net45</TargetFrameworks>
+        <RootNamespace>Pagination</RootNamespace>
+        <Description>Pagination Web MVC</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Pagination.Web\Pagination.Web.csproj" />
+        <ProjectReference Include="..\Pagination\Pagination.csproj" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+        <Reference Include="System.Web" />
+        <PackageReference Include="Microsoft.AspNet.Mvc" Version="3.0.20105.1" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+        <Reference Include="System.Web" />
+        <PackageReference Include="Microsoft.AspNet.Mvc" Version="3.0.20105.1" />
+    </ItemGroup>
+</Project>

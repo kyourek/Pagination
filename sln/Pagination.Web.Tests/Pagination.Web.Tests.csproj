@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>net40;net45;netcoreapp3.1</TargetFrameworks>
+        <RootNamespace>Pagination</RootNamespace>
+        <Description>Pagination Web Tests</Description>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+      <PackageReference Include="NUnit" Version="3.12.0" />
+      <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Pagination.Web\Pagination.Web.csproj" />
+      <ProjectReference Include="..\Pagination\Pagination.csproj" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+        <Reference Include="System.Web" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+        <Reference Include="System.Web" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+      <PackageReference Include="Microsoft.AspNetCore.Http">
+        <Version>2.2.2</Version>
+      </PackageReference>
+      <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions">
+        <Version>2.2.0</Version>
+      </PackageReference>
+    </ItemGroup>
+</Project>
