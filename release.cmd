@@ -1,0 +1,1 @@
+dotnet .\sln\Pagination.Release\bin\Debug\netcoreapp3.1\Pagination.Release.dll %*
