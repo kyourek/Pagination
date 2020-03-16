@@ -7,7 +7,7 @@ namespace Pagination.Web.Mvc {
     using Routing;
 
     public static class HtmlHelperExtension {
-        static string ActionName(this HtmlHelper htmlHelper) {
+        private static string ActionName(this HtmlHelper htmlHelper) {
             if (null == htmlHelper) throw new ArgumentNullException(nameof(htmlHelper));
             return htmlHelper.ViewContext?.RouteData?.Values?["action"]?.ToString();
         }

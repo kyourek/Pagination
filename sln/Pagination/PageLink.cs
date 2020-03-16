@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Pagination {
-    class PageLink : IPageLink {
+    internal class PageLink : IPageLink {
         public int LinkPageBaseZero { get; }
         public int LowerPageBaseZero { get; }
         public int UpperPageBaseZero { get; }

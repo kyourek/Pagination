@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Pagination {
-    class PageLinker : IPageLinker {
-        IEnumerable<IPageLink> PrevLinks(string text, bool force) {
+    internal class PageLinker : IPageLinker {
+        private IEnumerable<IPageLink> PrevLinks(string text, bool force) {
             var pageBaseZero = Page.PageBaseZero;
             var hasPrev = pageBaseZero > 0;
             if (hasPrev || force) {
@@ -15,7 +15,7 @@ namespace Pagination {
             }
         }
 
-        IEnumerable<IPageLink> NextLinks(string text, bool force) {
+        private IEnumerable<IPageLink> NextLinks(string text, bool force) {
             var pageBaseZero = Page.PageBaseZero;
             var hasNext = pageBaseZero < Page.PagesTotal - 1;
             if (hasNext || force) {
@@ -26,69 +26,63 @@ namespace Pagination {
             }
         }
 
-        IEnumerable<IPageLink> NumberedLinks(bool baseOne) {
-            return Enumerable
+        private IEnumerable<IPageLink> NumberedLinks(bool baseOne) =>
+            Enumerable
                 .Range(0, Page.PagesTotal)
                 .Select(pageBaseZero => new PageLink(
                     page: Page,
                     linkPageBaseZero: pageBaseZero,
                     linkText: (pageBaseZero + (baseOne ? 1 : 0)).ToString()));
-        }
 
         public IPage Page { get; }
         public IEnumerable<IPageLink> Links { get; }
 
-        IPageChain _Chain;
-        public IPageChain Chain => _Chain ?? (_Chain = new PageChain(Page, Links));
+        public IPageChain Chain =>
+            _Chain ?? (
+            _Chain = new PageChain(Page, Links));
+        private IPageChain _Chain;
 
         public PageLinker(IPage page, IEnumerable<IPageLink> links = null) {
             Page = page ?? throw new ArgumentNullException(nameof(page));
             Links = links ?? new IPageLink[] { };
         }
 
-        public IPageLinker Prev(string text, bool force) {
-            return new PageLinker(Page, Links.Concat(PrevLinks(text ?? "<", force)));
-        }
+        public IPageLinker Prev(string text, bool force) =>
+            new PageLinker(Page, Links.Concat(PrevLinks(text ?? "<", force)));
 
-        public IPageLinker Next(string text, bool force) {
-            return new PageLinker(Page, Links.Concat(NextLinks(text ?? ">", force)));
-        }
+        public IPageLinker Next(string text, bool force) =>
+            new PageLinker(Page, Links.Concat(NextLinks(text ?? ">", force)));
 
-        public IPageLinker Numbers(bool baseOne) {
-            return new PageLinker(Page, Links.Concat(NumberedLinks(baseOne)));
-        }
+        public IPageLinker Numbers(bool baseOne) =>
+            new PageLinker(Page, Links.Concat(NumberedLinks(baseOne)));
 
-        public IPageLinker Dynamic(bool baseOne) {
-            return new PageLinker(Page, Links.Concat(new DynamicLinker { BaseOne = baseOne }.Links(Page)));
-        }
+        public IPageLinker Dynamic(bool baseOne) =>
+            new PageLinker(Page, Links.Concat(new DynamicLinker { BaseOne = baseOne }.Links(Page)));
 
-        class DynamicLinker {
-            class LinkFactory {
+        private class DynamicLinker {
+            private class LinkFactory {
                 public IPage Page { get; set; }
                 public bool BaseOne { get; set; }
 
-                public PageLink CreateLink(int pageBaseZero, string text) {
-                    return new PageLink(
+                public PageLink CreateLink(int pageBaseZero, string text) =>
+                    new PageLink(
                         page: Page,
                         linkPageBaseZero: pageBaseZero,
                         linkText: text);
-                }
 
-                public PageLink CreateLink(int pageBaseZero) {
-                    return CreateLink(
+                public PageLink CreateLink(int pageBaseZero) =>
+                    CreateLink(
                         pageBaseZero: pageBaseZero,
                         text: BaseOne
                             ? (pageBaseZero + 1).ToString()
                             : pageBaseZero.ToString());
-                }
 
-                public PageLink CreateRange(int lowerPageBaseZero, int upperPageBaseZero) {
-                    return new PageLink(
+                public PageLink CreateRange(int lowerPageBaseZero, int upperPageBaseZero) =>
+                    new PageLink(
                         page: Page,
                         linkText: "...",
                         lowerPageBaseZero: lowerPageBaseZero,
                         upperPageBaseZero: upperPageBaseZero);
-                }
             }
 
             public bool BaseOne { get; set; }

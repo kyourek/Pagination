@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Pagination {
-    class PageChain : IPageChain {
+    internal class PageChain : IPageChain {
         public IPage Page { get; }
         public IEnumerable<IPageLink> Links { get; }
 

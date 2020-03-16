@@ -1,7 +1,15 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Pagination {
+    [Guid("B4F4B89E-5A62-46FB-86EA-B1FF6138A656")]
+    [ComVisible(true)]
+#if NETCOREAPP
+    [ClassInterface(ClassInterfaceType.None)]
+#else
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+#endif
     public class PageContext {
         private readonly PageConfig _Config = new PageConfig();
 

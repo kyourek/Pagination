@@ -1,5 +1,5 @@
 ﻿namespace Pagination {
-    class PageConfig : IPageConfig {
+    internal class PageConfig : IPageConfig {
         public int ItemsPerPageDefault { get; set; } = 25;
         public int ItemsPerPageMaximum { get; set; } = 100;
 
@@ -7,12 +7,12 @@
             get => _ItemsPerPageKey ?? (_ItemsPerPageKey = "_p_ipp");
             set => _ItemsPerPageKey = value;
         }
-        string _ItemsPerPageKey;
+        private string _ItemsPerPageKey;
 
         public string PageBaseZeroKey {
             get => _PageBaseZeroKey ?? (_PageBaseZeroKey = "_p_pbz");
             set => _PageBaseZeroKey = value;
         }
-        string _PageBaseZeroKey;
+        private string _PageBaseZeroKey;
     }
 }

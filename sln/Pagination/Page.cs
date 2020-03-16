@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 
 namespace Pagination {
-    class Page : IPage {
+    internal class Page : IPage {
         public int PageBaseZero { get; set; }
         public int PagesTotal { get; set; }
         public int ItemsPerPage { get; set; }
@@ -15,19 +15,19 @@ namespace Pagination {
             get => _Config ?? (_Config = new PageConfig());
             set => _Config = value;
         }
-        IPageConfig _Config;
+        private IPageConfig _Config;
 
         public IPageLinker Linker() => new PageLinker(this);
     }
 
-    class Page<TItem> : Page, IPage<TItem> {
+    internal class Page<TItem> : Page, IPage<TItem> {
         public new IQueryable<TItem> Items {
             get => (IQueryable<TItem>)base.Items;
             set => base.Items = value;
         }
     }
 
-    class Page<TItem, TState> : Page<TItem>, IPage<TItem, TState> {
+    internal class Page<TItem, TState> : Page<TItem>, IPage<TItem, TState> {
         public new TState State {
             get => (TState)base.State;
             set => base.State = value;

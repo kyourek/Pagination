@@ -5,7 +5,7 @@ namespace Pagination.Web.Mvc {
     using Routing;
 
     public static class UrlHelperExtension {
-        static string ActionName(this UrlHelper urlHelper) {
+        private static string ActionName(this UrlHelper urlHelper) {
             if (null == urlHelper) throw new ArgumentNullException(nameof(urlHelper));
             return urlHelper.RequestContext?.RouteData?.Values?["action"]?.ToString();
         }

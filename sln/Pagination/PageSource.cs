@@ -2,18 +2,18 @@
 using System.Linq;
 
 namespace Pagination {
-    class PageSource : IPageSource {
+    internal class PageSource : IPageSource {
         public IPageConfig Config {
             get => _Config ?? (_Config = new PageConfig());
             set => _Config = value;
         }
-        IPageConfig _Config;
+        private IPageConfig _Config;
 
         public PageRequest Request {
             get => _Request ?? (_Request = new PageRequest());
             set => _Request = value;
         }
-        PageRequest _Request;
+        private PageRequest _Request;
 
         public IPageSource SetItemsPerPage(int value) {
             Request.ItemsPerPage = value;
@@ -28,7 +28,7 @@ namespace Pagination {
         IPageRequest IPageSource.Request => Request;
     }
 
-    class PageSource<TItem> : PageSource, IPageSource<TItem> {
+    internal class PageSource<TItem> : PageSource, IPageSource<TItem> {
         protected IPage<TItem, TState> ReadPage<TState>(TState state) {
             var src = ItemsSource;
             var req = Request;
@@ -66,44 +66,28 @@ namespace Pagination {
             get => _Query ?? (_Query = new TItem[] { }.AsQueryable().OrderBy(item => item));
             set => _Query = value;
         }
-        IOrderedQueryable<TItem> _Query;
+        private IOrderedQueryable<TItem> _Query;
 
-        [Obsolete("Use 'ReadPage' instead.")]
-        public IPage<TItem> FindPage() {
-            return ReadPage();
-        }
+        public IPage<TItem> ReadPage() =>
+            ReadPage(default(object));
 
-        public IPage<TItem> ReadPage() {
-            return ReadPage(default(object));
-        }
+        public new IPageSource<TItem> SetItemsPerPage(int value) =>
+            (IPageSource<TItem>)base.SetItemsPerPage(value);
 
-        public new IPageSource<TItem> SetItemsPerPage(int value) {
-            return (IPageSource<TItem>)base.SetItemsPerPage(value);
-        }
-
-        public new IPageSource<TItem> SetPageBaseZero(int value) {
-            return (IPageSource<TItem>)base.SetPageBaseZero(value);
-        }
+        public new IPageSource<TItem> SetPageBaseZero(int value) =>
+            (IPageSource<TItem>)base.SetPageBaseZero(value);
     }
 
-    class PageSource<TItem, TState> : PageSource<TItem>, IPageSource<TItem, TState> {
+    internal class PageSource<TItem, TState> : PageSource<TItem>, IPageSource<TItem, TState> {
         public TState State { get; set; }
 
-        [Obsolete("Use 'ReadPage' instead.")]
-        public new IPage<TItem, TState> FindPage() {
-            return ReadPage();
-        }
+        public new IPage<TItem, TState> ReadPage() =>
+            ReadPage(State);
 
-        public new IPage<TItem, TState> ReadPage() {
-            return ReadPage(State);
-        }
+        public new IPageSource<TItem, TState> SetItemsPerPage(int value) =>
+            (IPageSource<TItem, TState>)base.SetItemsPerPage(value);
 
-        public new IPageSource<TItem, TState> SetItemsPerPage(int value) {
-            return (IPageSource<TItem, TState>)base.SetItemsPerPage(value);
-        }
-
-        public new IPageSource<TItem, TState> SetPageBaseZero(int value) {
-            return (IPageSource<TItem, TState>)base.SetPageBaseZero(value);
-        }
+        public new IPageSource<TItem, TState> SetPageBaseZero(int value) =>
+            (IPageSource<TItem, TState>)base.SetPageBaseZero(value);
     }
 }

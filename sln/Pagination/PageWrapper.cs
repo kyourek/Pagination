@@ -1,7 +1,15 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Pagination {
+    [Guid("A63B8679-46CE-404C-AF94-BF699697C8CA")]
+    [ComVisible(true)]
+#if NETCOREAPP
+    [ClassInterface(ClassInterfaceType.None)]
+#else
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+#endif
     public class PageWrapper : IPage {
         public IPage Page { get; }
 
