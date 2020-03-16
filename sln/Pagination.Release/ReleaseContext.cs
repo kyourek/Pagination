@@ -1,5 +1,5 @@
 ﻿namespace Pagination {
-    class ReleaseContext {
+    internal class ReleaseContext {
         public ReleaseVersion Version { get; set; }
     }
 }

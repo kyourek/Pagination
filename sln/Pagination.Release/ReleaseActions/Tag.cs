@@ -1,5 +1,5 @@
 ﻿namespace Pagination.ReleaseActions {
-    class Tag : ReleaseAction {
+    internal class Tag : ReleaseAction {
         public override void Work() {
             var tag = Context.Version.StagedVersion;
             Process("git", "status");

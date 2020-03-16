@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
 namespace Pagination {
-    abstract class ReleaseAction {
+    internal abstract class ReleaseAction {
         protected void Process(string fileName, params string[] arguments) {
             var args = string.Join(" ", arguments);
-            Log(fileName + " " + args);
+            Log($"{fileName} {args}");
+
+            if (ProcessPath.TryGetValue(fileName, out string processPath)) {
+                fileName = processPath;
+                Log($"Using {fileName}");
+            }
+
             using (var process = new Process()) {
                 process.StartInfo.FileName = fileName;
                 process.StartInfo.Arguments = args;
@@ -31,19 +38,19 @@ namespace Pagination {
             get {
                 if (_SolutionDirectory == null) {
                     _SolutionDirectory = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-                    while (Directory.GetFiles(_SolutionDirectory).Any(file => Path.GetFileName(file) == "Pagination.sln") == false) {
+                    while (Directory.GetFiles(_SolutionDirectory).Any(file => Path.GetFileName(file) == SolutionFileName) == false) {
                         _SolutionDirectory = Path.GetDirectoryName(_SolutionDirectory);
                     }
                 }
                 return _SolutionDirectory;
             }
-            set {
-                _SolutionDirectory = value;
-            }
+            set => _SolutionDirectory = value;
         }
-        string _SolutionDirectory;
+        private string _SolutionDirectory;
 
-        public string SolutionFilePath => Path.Combine(SolutionDirectory, "Pagination.sln");
+        public string SolutionFileName { get; set; }
+        public string SolutionFilePath => Path.Combine(SolutionDirectory, SolutionFileName);
+        public string PropertiesFilePath => Path.Combine(SolutionDirectory, "Directory.Build.props");
 
         public string Stage { get; set; }
         public Action<string> Log { get; set; }
@@ -52,7 +59,13 @@ namespace Pagination {
             get => _Context ?? (_Context = new ReleaseContext());
             set => _Context = value;
         }
-        ReleaseContext _Context;
+        private ReleaseContext _Context;
+
+        public IDictionary<string, string> ProcessPath {
+            get => _ProcessPath ?? (_ProcessPath = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase));
+            set => _ProcessPath = value;
+        }
+        private IDictionary<string, string> _ProcessPath;
 
         public abstract void Work();
     }

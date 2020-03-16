@@ -1,5 +1,3 @@
-﻿using System.Reflection;
+﻿using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Pagination.Release")]
-[assembly: AssemblyDescription("Pagination Release")]
-[assembly: AssemblyProduct("Pagination.Release")]
+[assembly: ComVisible(false)]

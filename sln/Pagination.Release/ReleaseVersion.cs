@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace Pagination {
-    class ReleaseVersion {
-        ReleaseVersion() {
+    internal class ReleaseVersion {
+        private ReleaseVersion() {
         }
 
         public int Major { get; private set; }
@@ -11,17 +11,23 @@ namespace Pagination {
         public string Stage { get; private set; }
         public int? Revision { get; private set; }
 
-        string _FullVersion;
-        public string FullVersion => _FullVersion ?? (_FullVersion = 
-            (Revision ?? 0) == 0
-                ? $"{Major}.{Minor}.{Build}"
-                : $"{Major}.{Minor}.{Build}.{Revision}");
+        public string FullVersion => (Revision ?? 0) == 0
+            ? $"{Major}.{Minor}.{Build}"
+            : $"{Major}.{Minor}.{Build}.{Revision}";
 
-        string _StagedVersion;
-        public string StagedVersion => _StagedVersion ?? (_StagedVersion =
-            Stage == null
-                ? $"{Major}.{Minor}.{Build}"
-                : $"{Major}.{Minor}.{Build}-{Stage}{((Revision ?? 0) == 0 ? "" : $".{Revision}")}");
+        public string StagedVersion => Stage == null
+            ? $"{Major}.{Minor}.{Build}"
+            : $"{Major}.{Minor}.{Build}-{Stage}{((Revision ?? 0) == 0 ? "" : $".{Revision}")}";
+
+        public string VersionPrefix => $"{Major}.{Minor}.{Build}";
+        public string VersionSuffix => Stage == null
+            ? ""
+            : $"{Stage}{((Revision ?? 0) == 0 ? "" : $".{Revision}")}";
+
+        public string AssemblyVersion => VersionPrefix;
+        public string InformationalVersion => StagedVersion;
+        public string FileVersion => FullVersion;
+        public string PackageVersion => StagedVersion;
 
         public static ReleaseVersion ParseFullVersion(string fullVersion, string stage) {
             fullVersion = fullVersion ?? throw new ArgumentNullException(nameof(fullVersion));
@@ -39,18 +45,17 @@ namespace Pagination {
                 Major = int.Parse(versionMajor),
                 Minor = int.Parse(versionMinor),
                 Revision = versionRevsn == "" ? default(int?) : int.Parse(versionRevsn),
-                Stage = stage == "" ? null : stage
+                Stage = versionStage == "" ? null : versionStage
             };
         }
 
-        public ReleaseVersion NextRevision() {
-            return new ReleaseVersion {
+        public ReleaseVersion NextRevision() =>
+            new ReleaseVersion {
                 Build = Build,
                 Major = Major,
                 Minor = Minor,
                 Revision = (Revision ?? 0) + 1,
                 Stage = Stage
             };
-        }
     }
 }
