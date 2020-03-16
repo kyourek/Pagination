@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CBE9A545
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{139FFCCD-2B73-436E-9DD7-F79885A5245D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Release", "Pagination.Release\Pagination.Release.csproj", "{FC5470D7-83E1-4960-BB8E-C15D9A66370B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Release", "Pagination.Release\Pagination.Release.csproj", "{FC5470D7-83E1-4960-BB8E-C15D9A66370B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Sample", "Pagination.Sample\Pagination.Sample.csproj", "{5531F98E-E309-4601-8AC5-95AF09206650}"
 EndProject
@@ -40,7 +40,6 @@ Global
 		{5531F98E-E309-4601-8AC5-95AF09206650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5531F98E-E309-4601-8AC5-95AF09206650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5531F98E-E309-4601-8AC5-95AF09206650}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5531F98E-E309-4601-8AC5-95AF09206650}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1F9ACC8-38B9-4E80-8097-740693BC6EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1F9ACC8-38B9-4E80-8097-740693BC6EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F9ACC8-38B9-4E80-8097-740693BC6EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
