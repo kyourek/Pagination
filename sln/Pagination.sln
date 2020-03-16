@@ -5,13 +5,6 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CBE9A545-BABE-47D5-849D-4837BE55CDC9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{95F9BE95-E62E-4DCE-A6BF-6F49FB46DDB6}"
-	ProjectSection(SolutionItems) = preProject
-		Pagination.nuspec = Pagination.nuspec
-		Pagination.Web.Mvc.nuspec = Pagination.Web.Mvc.nuspec
-		Pagination.Web.nuspec = Pagination.Web.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tool", "tool", "{139FFCCD-2B73-436E-9DD7-F79885A5245D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Release", "Pagination.Release\Pagination.Release.csproj", "{FC5470D7-83E1-4960-BB8E-C15D9A66370B}"
@@ -31,9 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Web", "Paginatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Web.Tests", "Pagination.Web.Tests\Pagination.Web.Tests.csproj", "{829CF817-FC2F-4045-AB6C-474F51A83BC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Mvc", "Pagination.Web.Mvc\Pagination.Web.Mvc.csproj", "{C67E7CD5-16E8-494F-992D-949A675BF84B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Web.Mvc", "Pagination.Web.Mvc\Pagination.Web.Mvc.csproj", "{C67E7CD5-16E8-494F-992D-949A675BF84B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pagination.Web.Mvc.Tests", "Pagination.Web.Mvc.Tests\Pagination.Web.Mvc.Tests.csproj", "{1613A081-4D59-4E3D-B35A-CD474A78F1EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination.Web.Mvc.Tests", "Pagination.Web.Mvc.Tests\Pagination.Web.Mvc.Tests.csproj", "{1613A081-4D59-4E3D-B35A-CD474A78F1EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
