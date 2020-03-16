@@ -7,7 +7,7 @@
     <VersionSuffix></VersionSuffix>
     <AssemblyVersion>3.0.0</AssemblyVersion>
     <InformationalVersion>3.0.0</InformationalVersion>
-    <FileVersion>3.0.0.1</FileVersion>
+    <FileVersion>3.0.0.2</FileVersion>
     <PackageVersion>3.0.0</PackageVersion>
     <PackageProjectUrl>https://github.com/kyourek/Pagination</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
