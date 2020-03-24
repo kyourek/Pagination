@@ -1,10 +1,9 @@
-﻿using Domore.Conf;
+﻿using Domore;
 
 namespace Pagination {
     internal class Program {
         private static void Main(string[] args) {
-            Conf.ContentsProvider = new AppSettingsProvider();
-            new Release(args);
+            Console.Release(args);
         }
     }
 }
