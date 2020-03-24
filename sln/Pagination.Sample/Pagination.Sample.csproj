@@ -5,7 +5,7 @@
         <Description>Pagination Sample</Description>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="bootstrap" Version="3.3.7" />
+      <PackageReference Include="bootstrap" Version="3.4.1" />
       <PackageReference Include="Microsoft.AspNet.Mvc" Version="3.0.20105.1" />
     </ItemGroup>
     <ItemGroup>
